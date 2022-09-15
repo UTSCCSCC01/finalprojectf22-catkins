@@ -1,4 +1,4 @@
- Discord Chat/Server Invite:   https://discord.gg/GqdYnfhpH5
+ Discord Chat/Server Invite:   https://discord.gg/Uwp9nyWM2u
 
 | Full Name | UTORID | Student ID | Email | Best Way to Contact | Discord Username |    
 | ------------- |-------------| -----| ------------- |-------------| -----|
