@@ -1,7 +1,7 @@
- ###Discord Chat/Server Invite:   https://discord.gg/GqdYnfhpH5
+ Discord Chat/Server Invite:   https://discord.gg/GqdYnfhpH5
 
 | Full Name | UTORID | Student ID | Email | Best Way to Contact | Discord Username |    
-| ------------- |:-------------:| -----:| ------------- |:-------------:| -----:|
+| ------------- |-------------| -----| ------------- |-------------| -----|
 | Patricia Midori Nagatani | nagatan4 |1005359602 | patricia.nagatani@mail.utoronto.ca | 6479490641 | Amu#2266 | 
 | Xiao Tian Yu | yuxiao47 | 1008204774 | tyan.yu@mail.utoronto.ca | 6478071308 | magpie#6462 | 
 | Howie Chen | chencun1 | 1007477687 | Howie.chen@mail.utoronto.ca | email | Zeneo#4872 |
