@@ -18,7 +18,9 @@ Make sure you have Node.js and NPM installed on your pc, you can check on your C
 You may need to also install some dependencies, so go ahead and run this on your terminal:
 > npm install express cors mongoose dotenv
 > npm install react-scripts --save
+
 If react-scripts doesn’t automatically install, you might have to add “sudo” in front of the command
+
 > npm install -g nodemon 
 
 ### Running
