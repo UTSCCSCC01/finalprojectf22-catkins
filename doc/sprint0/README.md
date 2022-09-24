@@ -27,9 +27,11 @@ If react-scripts doesn’t automatically install, you might have to add “sudo�
 Go into setup>backend, open terminal and run "nodemon server"
 
 ### Front-end
-You will need to install Bootstrap and React
-> npm install bootstrap 
-> npm install react-router-dom
+You will need to install all the dependencies 
+> npm install
+And then start the React localhost server
+> npm start
+It will start the Front-end of the page
 
 ### Main Browser: Google Chrome
 Using others might provide you with a not ideal experience
