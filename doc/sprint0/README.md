@@ -28,9 +28,13 @@ Go into setup>backend, open terminal and run "nodemon server"
 
 ### Front-end
 You will need to install all the dependencies 
+
 > npm install
+
 And then start the React localhost server
+
 > npm start
+
 It will start the Front-end of the page
 
 ### Main Browser: Google Chrome
