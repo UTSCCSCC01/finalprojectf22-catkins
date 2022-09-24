@@ -1,17 +1,40 @@
 import axios from 'axios';
-import Reach, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function ClubsList() {
+  const [clubs, setClubs] = useState([{}]);
   useEffect(() => {
     axios.get('http://localhost:5000/clubs').then(resp => {
 
-      console.log(resp.data[0]);
+    setClubs(resp.data)
+      // console.table(resp.data[0]);
   });
   }, []);
 
   return (
     <div className="container">
-      Hello World!
+      <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Description</th>
+          <th>ClubType</th>
+        </tr>
+      </thead>
+      <tbody>
+          {clubs.map((club) => {
+            return(
+              <tr key={club.name}>
+                <th>{club.name}</th>
+                <th>{club.username}</th>
+                <th>{club.description}</th>
+                <th>{club.clubType}</th>
+              </tr>
+            ); 
+          })};
+        </tbody>
+    </table>
     </div>
   );
 }
