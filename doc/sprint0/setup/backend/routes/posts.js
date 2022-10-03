@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 // Mongo model
 let Post = require('../models/post.model');
+let Club = require('../models/club.model');
 
 // Endpoint that takes care of http get requests
 router.route('/').get((req, res) => {
@@ -25,22 +26,41 @@ router.route('/add').post((req, res) => {
     const group = req.body.group;
     const description = req.body.description;
 
-    // Create new post instance
-    const newPost = new Post({
-        title,
-        username,
-        group, 
-        description,   
-    });
-
-    // Save post to database
-    newPost.save()
-
-        // Feedback
-        .then(() => res.json('Posted'))
+    // Check if club exists
+    Club.find({name: group}, (err, clubs) => {
 
         // Error catching
-        .catch(err => res.status(400).json('Error: ' + err));
+        if (err) {
+            res.status(400).json('Error: ' + err);
+            return;
+        }
+
+        // Checking
+        if (clubs.length) {
+
+            // Create new post instance
+            const newPost = new Post({
+                title,
+                username,
+                group, 
+                description,   
+            });
+
+            // Save post to database
+            newPost.save()
+
+                // Feedback
+                .then(() => res.json('Posted'))
+
+                // Error catching
+                .catch(err => res.status(400).json('Error: ' + err));
+
+        } else {
+            req.json('Group doesn\'t exist');
+        }
+    });
+
+    
 });
 
 // Get request post information based on URI
