@@ -1,0 +1,66 @@
+Resources:
+Intro to mongoDB and Mongoose - https://www.youtube.com/watch?v=-PdjUx9JZ2E&ab_channel=DaveGray
+
+mongoDB -> The "M" in MERN Stack
+
+Non-SQL database - Stores data in collections, the individual records are called documents
+
+The documents have a key value structure that looks like json
+
+Advantages:
+1. Performance - speed of querying
+2. Flexibility - Easy to add a new field
+3. Scalability - Supports large databases with high requests rates at low latency 
+4. Usability - Easy/Fast to run in the cloud 
+
+Official website: mongodb.com
+
+When you enter mongodb.com and login, you will need to create a new project and start your database. 
+
+You can select all default settings as it wil be free. 
+
+Creating Data:
+On the left menu, go to Databases>Collections to see your data
+Then Add my Own Data 
+
+Access:
+On the left menu, go to Database Access and create new user:
+User: Manager
+Password: Password
+Role: readWriteanyDatabase
+
+Connecting:
+On the left menu, go to Databases and click Connect
+Select to allow from any location and add the default IP address
+Then select Connect your application
+It gives a connection string, now you need to replace the password in that string and replace the "myFirstDatabase" with the Company.db (name we gave)
+!!! The video is from 10 months ago, there's no need to replace the database name anymore
+
+Connection string:
+mongodb+srv://Manager:Password@cluster0.ijlyyyc.mongodb.net/?retryWrites=true&w=majority
+
+Add it in .env file assigned to DATABASE_URI 
+
+MONGOOSE
+Is a library that makes working with mongoDB easier
+Official page: mongoosejs.com
+
+===============================================
+Learn the MERN Stack - https://www.youtube.com/watch?v=7CqJlxBYj-M&t=3431s&ab_channel=freeCodeCamp.org
+
+First tutorial didn't fully worked, so the code refers to the link above
+
+Create a backend file, and run "npm init -y" on your terminal
+
+Libraries: 
+    express - webframework for node.js
+    cors - "cross origin resource sharing", allows ajax requests to skip the origin policy and access resources from remote hosts
+    mongoosejs - makes working with mongoDB easier
+    dotenv - Loads environment variables from a .end file into process.end, makes development easier (it stores development variables in a file instead of the machine)
+    nodemon - Helps develop node.js based applications by automatically restarting the node application when files are changed
+
+
+INSONMIA
+>> Test endpoints
+http://localhost:5000/user/add for example
+
