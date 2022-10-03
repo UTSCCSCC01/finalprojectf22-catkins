@@ -29,10 +29,12 @@ connection.once('open', () => {
 // Requiring the files
 const clubsRouter = require('./routes/clubs');
 const usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts')
 
 // When they go to /location, they will go to that router
 app.use('/clubs', clubsRouter);
 app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
 
 // Starts listening to a PORT
 app.listen(port, () => {
