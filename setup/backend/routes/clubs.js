@@ -10,19 +10,19 @@ router.route('/').get((req, res) => {
 });
 
 // Endpoint that takes care of http post requests
-router.route('/add').post((req, res) => {
+router.route('/create').post((req, res) => {
     // Request variables necessary
-    const username = req.body.username;
+    const owner = req.body.owner;
     const name = req.body.name;
     const description = req.body.description;
-    const clubType = req.body.clubType;
+    const clubTags = req.body.clubTags;
 
     // Create new instance of club
     const newClub = new Club({
         name,
-        username, 
+        owner, 
         description, 
-        clubType,    
+        clubTags,    
     });
 
     // Save club to database
