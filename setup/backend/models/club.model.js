@@ -1,12 +1,16 @@
+import User from "./user.model";
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
 const clubSchema = new Schema({
     name: {type: String, required: true},
-    username: { type: String, required: true},
+    owner: { type: String, required: true},
     description: { type: String, required: true},
-    clubType: {type: String, required: true}, 
+    // Set lis of tags
+    clubTags: [{type: String, required: true}],
+    // Set list of members
+    members: [{type: User, required: false}] 
 }, {
     timestamps: true, //when was created/modified
 });
