@@ -32,6 +32,16 @@ router.route('/add').post((req, res) => {
 
 });
 
+// Find club based on name
+router.route('/search').get((req, res) => {
+    
+    const name = req.body.name;
+    // Search
+    Club.find({name: name})
+    .then(club => res.json(club))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // Get information about the club on the URI
 router.route("/:id").get((req, res) => {
     Club.findById(req.params.id)
