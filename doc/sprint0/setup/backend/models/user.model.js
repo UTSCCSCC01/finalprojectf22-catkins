@@ -10,10 +10,6 @@ const userSchema = new Schema({
         trim: true, //trim white spaces in the end
         minlength: 3
     },
-    following : {
-        type: [String],
-        required: true
-    },
 }, {
     timestamps: true, //when was created/modified
 })
