@@ -97,11 +97,14 @@ Routes
 
     /users
         Request handlers
-            /users/
+            /users/ 
                 http get request returns a list of all users with no particular oder in json format
 
             /users/add
                 http post request adds a user to the database given a json body in the schema of the user described in models
+
+            /users/search
+                http get request returns user from the database given its username (unique string)
 
             /users/:id
                 http get request returns user from the database given its id in json format

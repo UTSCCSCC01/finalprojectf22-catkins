@@ -30,6 +30,16 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
+// Find user based on name
+router.route('/search').get((req, res) => {
+    
+    const username = req.body.name;
+    // Search
+    User.find({username: name})
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // Get information about the user on the URI
 router.route("/:id").get((req, res) => {
     User.findById(req.params.id)
