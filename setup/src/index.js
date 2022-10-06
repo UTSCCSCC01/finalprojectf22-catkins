@@ -4,10 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-<BrowserRouter>
-    <App />
-    </BrowserRouter>
+// Where the application starts
+// Render the content we pass on App at a certain element
 
-);
+ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
+

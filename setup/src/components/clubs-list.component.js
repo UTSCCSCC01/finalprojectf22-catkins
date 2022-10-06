@@ -3,15 +3,18 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { isRouteErrorResponse } from 'react-router-dom';
 
-function ClubsList() {
-  const [clubs, setClubs] = useState([{}]);
-  useEffect(() => {
-    axios.get('http://localhost:5000/clubs').then(resp => {
+export default class ClubsList extends React.Component {
+  state = {
+    persons: []
+  }
 
-    setClubs(resp.data)
-      // console.table(resp.data[0]);
-  });
-  }, []);
+  componentDidMount() {
+    axios.get(`/clubs`)
+      .then(res => {
+        const clubs = res.data;
+        this.setState({ clubs });
+      })
+  }
 
   /*const [user, setUser] = useState({});
   useEffect(() => {
