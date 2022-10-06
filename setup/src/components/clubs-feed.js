@@ -7,7 +7,7 @@ function ClubsFeed() {
   const [clubsFeed, setClubsFeed] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/posts').then(res => {
+    axios.get('http://localhost:5000/feed').then(res => {
 
     console.log(res.data)
     setClubsFeed(res.data)
