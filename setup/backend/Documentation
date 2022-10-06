@@ -106,5 +106,8 @@ Routes
             /users/:id
                 http get request returns user from the database given its id in json format
 
+            /users/:id
+                http delete request that removes a user from the database given its id
+
             /users/update/:id
                 http update request edits user in the database given its id and a json body

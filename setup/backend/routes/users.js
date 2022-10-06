@@ -37,6 +37,13 @@ router.route("/:id").get((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
+// delete the user with that id
+router.route('/:id').delete((req, res) => {
+    User.findByIdAndDelete(req.params.id)
+    .then(() => res.json("User deleted."))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // Update the user
 router.route('/update/:id').post((req, res) => {
     User.findById(req.params.id)
