@@ -68,7 +68,7 @@ Routes
     /feed
         Request handlers
             /feed/
-                http get request that returns a json list of posts sorted by date created
+                http get request that returns a json list of posts sorted by date created (new first), only shows posts the user is following or posts set to public
 
         Description
             Route for general feed including all public group posts as well as public user posts
