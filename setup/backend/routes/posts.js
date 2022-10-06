@@ -26,6 +26,7 @@ router.route('/add').post((req, res) => {
     const group = req.body.group;
     const description = req.body.description;
     const public = req.body.public;
+    const priority = req.body.priority;
 
     // Check if club exists
     Club.find({name: group}, (err, clubs) => {
@@ -45,7 +46,8 @@ router.route('/add').post((req, res) => {
                 username,
                 group,
                 description,
-                public
+                public,
+                priority
             });
 
             // Save post to database
@@ -104,6 +106,7 @@ router.route('/update/:id').post((req, res) => {
         post.group = req.body.group;
         post.description = req.body.description;
         post.public = req.body.public;
+        post.priority = req.body.public;
 
         post.save()
 

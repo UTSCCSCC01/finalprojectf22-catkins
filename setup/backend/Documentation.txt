@@ -4,9 +4,9 @@ Models
         Schema
             name: String required -> name of club
             owner: String required -> username of club creater
-            description: String required -> description of club
-            clubTags: String Array required -> list of strings corresponding to tags
-            members: User Array required -> list of users corresponding to members in the group/club
+            description: String required default empty -> description of club
+            clubTags: String Array required default empty -> list of strings corresponding to tags
+            members: User Array required default empty -> list of users corresponding to members in the group/club
             
             timestamps -> created and modified timestamps
         
@@ -18,7 +18,10 @@ Models
             title: String required -> title of the post
             username: String required -> username of poster
             group: String requried -> group/club the post belongs to
-            description: String required -> body of the post
+            description: String required default empty -> body of the post
+            public: Bool required -> whether the post is visible to everyone (true) or only group members (false)
+            priority: Int default 0 -> the priority of the post in feed, higher number displayed first
+                0 for normal posts, 1 for questions, 2 for announcments
 
             timestamps -> created and modified timestamps
 
@@ -68,7 +71,7 @@ Routes
     /feed
         Request handlers
             /feed/
-                http get request that returns a json list of posts sorted by date created (new first), only shows posts the user is following or posts set to public
+                http get request that returns a json list of posts sorted by date created (new first), only shows posts the user is following or posts set to public, also sorts posts by priority highest number first
 
         Description
             Route for general feed including all public group posts as well as public user posts
