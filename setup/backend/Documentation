@@ -97,7 +97,7 @@ Routes
 
     /users
         Request handlers
-            /users/
+            /users/ 
                 http get request returns a list of all users with no particular oder in json format
 
             /users/add
