@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-// helps connect to mongo.db 
+// helps connect to mongo.db
 const mongoose = require('mongoose');
 
 // Environment variables in .env file
@@ -29,37 +29,18 @@ connection.once('open', () => {
 // Requiring the files
 const clubsRouter = require('./routes/clubs');
 const usersRouter = require('./routes/users');
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-const postsRouter = require('./routes/posts')
-=======
 const postsRouter = require('./routes/posts');
 const feedRouter = require('./routes/feed');
->>>>>>> CAT-38-US-1.2
-=======
-const postsRouter = require('./routes/posts')
->>>>>>> CAT-37-US-1.1
-=======
-const postsRouter = require('./routes/posts');
-const feedRouter = require('./routes/feed');
->>>>>>> CAT-38-US-1.2
+
+
 
 // When they go to /location, they will go to that router
 app.use('/clubs', clubsRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 app.use('/feed', feedRouter);
->>>>>>> CAT-38-US-1.2
-=======
->>>>>>> CAT-37-US-1.1
-=======
-app.use('/feed', feedRouter);
->>>>>>> CAT-38-US-1.2
+
 
 // Starts listening to a PORT
 app.listen(port, () => {

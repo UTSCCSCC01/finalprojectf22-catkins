@@ -42,8 +42,8 @@ router.route('/add').post((req, res) => {
             const newPost = new Post({
                 title,
                 username,
-                group, 
-                description,   
+                group,
+                description,
             });
 
             // Save post to database
@@ -60,7 +60,7 @@ router.route('/add').post((req, res) => {
         }
     });
 
-    
+
 });
 
 // Get request post information based on URI
@@ -103,7 +103,7 @@ router.route('/update/:id').post((req, res) => {
         post.description = req.body.description;
 
         post.save()
-        
+
         // Feedback
         .then(() => res.json("Post Edited"))
 
