@@ -10,6 +10,19 @@ const userSchema = new Schema({
         trim: true, //trim white spaces in the end
         minlength: 3
     },
+    password : { 
+        type: String, 
+        required: true,
+        minlength: 6
+    },
+    role: {
+        type: String,
+        required: true
+    },
+    following : {
+        type: [String],
+        required: false
+    },
 }, {
     timestamps: true, //when was created/modified
 })

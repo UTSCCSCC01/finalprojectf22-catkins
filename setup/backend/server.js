@@ -31,13 +31,17 @@ const clubsRouter = require('./routes/clubs');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const feedRouter = require('./routes/feed');
+<<<<<<< HEAD:doc/sprint0/setup/backend/server.js
 
 
+=======
+>>>>>>> catkins_dev:setup/backend/server.js
 
 // When they go to /location, they will go to that router
 app.use('/clubs', clubsRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/feed', feedRouter);
 
 app.use('/feed', feedRouter);
 

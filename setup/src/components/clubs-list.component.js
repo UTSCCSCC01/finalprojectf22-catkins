@@ -1,0 +1,113 @@
+import { render } from '@testing-library/react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { isRouteErrorResponse } from 'react-router-dom';
+
+function ClubsList() {
+  const [clubs, setClubs] = useState([{}]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/clubs').then(resp => {
+
+    setClubs(resp.data)
+      // console.table(resp.data[0]);
+  });
+  }, []);
+
+  /*const [user, setUser] = useState({});
+  useEffect(() => {
+    axios.get('http://localhost:5000/users/'+'633e2d62c31ac0ed271ce079').then(resp => {
+
+    setUser(resp.data)
+      // console.table(resp.data[0]);
+  });
+  }, []);*/
+
+  //Test user for now
+  const user = 	{
+                  "_id": "633e2d62c31ac0ed271ce079",
+                  "username": "mario",
+                  "password": "mariopassword",
+                  "role": "student",
+                  "following": [
+                    "Badminton",
+                    "Soccer"
+                  ],
+                  "createdAt": "2022-10-06T01:20:34.736Z",
+                  "updatedAt": "2022-10-06T01:26:44.070Z",
+                  "__v": 8
+                }
+  
+  return (
+    <div className="container">
+      <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Description</th>
+          <th>ClubType</th>
+        </tr>
+      </thead>
+      <tbody>
+          {clubs.map((club) => {
+            let button = <button onClick={() => follow(club.name)}>Follow</button>
+            return(
+              <tr key={club.name}>
+                <th>{club.name}</th>
+                <th>{club.username}</th>
+                <th>{club.description}</th>
+                <th>{club.clubType}</th>
+
+                {/* Create a follow or unfollow button for each corresponding club */}
+                {(() => {
+                  let button = <button onClick={() => follow(club.name, user)}>Follow</button>
+                  if (user.following != undefined) {
+                    if (user.following.includes(club.name)) {
+                      button = <button onClick={() => unFollow(club.name, user)}>UnFollow</button>
+                    }
+                  }
+                  return (
+                    button
+                  )
+                })()}
+
+              </tr>
+            ); 
+          })};
+        </tbody>
+    </table>
+    </div>
+  );
+}
+
+function follow(name, user) {
+  if (!user.following.includes(name)){
+    user.following.push(name)
+  }
+  const updatedUser = {
+    username: user.username,
+    password: user.password,
+    role: user.role,
+    following: user.following
+  }
+
+  //axios.post('http://localhost:5000/users/update/'+'633e2d62c31ac0ed271ce079', updatedUser)
+  window.location.reload(false)
+}
+
+function unFollow(name, user) {
+  if (user.following.includes(name)){
+    user.following.splice(user.following.indexOf(name), 1);
+  }
+  const updatedUser = {
+    username: user.username,
+    password: user.password,
+    role: user.role,
+    following: user.following
+  }
+
+  //axios.post('http://localhost:5000/users/update/'+'633e2d62c31ac0ed271ce079', updatedUser)
+  window.location.reload(false)
+}
+
+export default ClubsList;
