@@ -29,6 +29,10 @@ If react-scripts doesn’t automatically install, you might have to add “sudo�
 ### Running
 Go into setup>backend, open terminal and run "nodemon server"
 
+Go into setup, open a second terminal and run "nodemon server"
+
+The frontend site will be hosted on http://localhost:3000 while backend on http://localhost:5000
+
 ### Front-end
 You will need to install all the dependencies 
 
