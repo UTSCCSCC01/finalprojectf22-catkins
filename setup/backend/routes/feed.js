@@ -22,7 +22,7 @@ const student = 	{
 router.route('/').get((req, res) => {
 
     // Finds all posts from database that are public or from following
-    Post.find({$or: [{public: true}, {group: {$in: student.following}}]}).sort({createdAt: -1})
+    Post.find({$or: [{public: true}, {group: {$in: student.following}}]}).sort({priority: -1, createdAt: -1})
 
         // Json with posts
         .then(posts => res.json(posts))
