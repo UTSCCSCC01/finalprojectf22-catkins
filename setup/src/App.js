@@ -1,37 +1,33 @@
-import Reach from 'react';
-import { Routes, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css"
+//import Reach from 'react';
+import { Routes, Route, Link} from "react-router-dom";
 
 import ClubsList from './components/clubs-list.component';
-import CreateClub from './components/create-club.component';
-import CreateUser from './components/create-user.component';
-import EditClub from './components/edit-club.component';
-
-import axios from "axios";
+import ClubCreate from './components/create-club.component';
+// import CreateUser from './components/create-user.component';
+// import EditClub from './components/edit-club.component';
 
 function App() {
 
   return (
     <div>
-    <div className='container'>
-    <nav className="navbar navbar-expand navbar-dark bg-dark">
-      <a href="/clubs" className="navbar-brand">
+    <>
+    <a href="/clubs">
+      Clubs list
+    </a>
+    <br></br>
+    <a href="/clubs/create">
         Clubs List
-      </a>
-      <a href="/users" className="navbar-brand">
-        Users List
-      </a>
-      <a href="/clubs/update/:id" className="navbar-brand">
-        Update Club
-      </a>
-    </nav>
+    </a>
     <Routes>
-        <Route path="clubs" element={<ClubsList/>} />
+      <Route path="/clubs/create" element={<ClubCreate/>} />
+      <Route path="/clubs" element={<ClubsList/>} />
     </Routes>
-
+    </>
     </div>
-  </div>
+  
+
   );
 }
+
 
 export default App;

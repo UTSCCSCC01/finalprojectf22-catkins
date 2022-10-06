@@ -1,5 +1,6 @@
-import User from "./user.model";
+//import User from "./user.model";
 const mongoose = require("mongoose");
+const { useReducer } = require("react");
 
 const Schema = mongoose.Schema;
 
@@ -10,7 +11,7 @@ const clubSchema = new Schema({
     // Set lis of tags
     clubTags: [{type: String, required: true}],
     // Set list of members
-    members: [{type: User, required: false}] 
+    members: [{type: String, required: false}] 
 }, {
     timestamps: true, //when was created/modified
 });

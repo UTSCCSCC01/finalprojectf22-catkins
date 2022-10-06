@@ -1,42 +1,29 @@
+import React from 'react';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 
-function ClubsList() {
-  const [clubs, setClubs] = useState([{}]);
-  useEffect(() => {
-    axios.get('http://localhost:5000/clubs').then(resp => {
+export default class ClubsList extends React.Component {
+  state = {
+    persons: []
+  }
 
-    setClubs(resp.data)
-      // console.table(resp.data[0]);
-  });
-  }, []);
+  componentDidMount() {
+    axios.get(`/clubs`)
+      .then(res => {
+        const clubs = res.data;
+        this.setState({ clubs });
+      })
+  }
 
-  return (
-    <div className="container">
-      <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Description</th>
-          <th>ClubType</th>
-        </tr>
-      </thead>
-      <tbody>
-          {clubs.map((club) => {
-            return(
-              <tr key={club.name}>
-                <th>{club.name}</th>
-                <th>{club.username}</th>
-                <th>{club.description}</th>
-                <th>{club.clubType}</th>
-              </tr>
-            ); 
-          })};
-        </tbody>
-    </table>
-    </div>
-  );
+  render() {
+    return (
+      <ul>
+        {
+          this.state.clubs
+            .map(club =>
+              <li key={club.id}>{club.name}</li>
+            )
+        }
+      </ul>
+    )
+  }
 }
-
-export default ClubsList;
