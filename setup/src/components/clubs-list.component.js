@@ -15,7 +15,7 @@ function ClubsList() {
 
   /*const [user, setUser] = useState({});
   useEffect(() => {
-    axios.get('http://localhost:5000/users/'+'633e2d62c31ac0ed271ce079').then(resp => {
+    axios.get('http://localhost:5000/users/'+'633eece780fabeb102d55acd').then(resp => {
 
     setUser(resp.data)
       // console.table(resp.data[0]);
@@ -30,7 +30,7 @@ function ClubsList() {
                   "role": "student",
                   "following": [
                     "Badminton",
-                    "Soccer"
+                    "Music Club"
                   ],
                   "createdAt": "2022-10-06T01:20:34.736Z",
                   "updatedAt": "2022-10-06T01:26:44.070Z",
@@ -91,7 +91,7 @@ function follow(name, user) {
     following: user.following
   }
 
-  //axios.post('http://localhost:5000/users/update/'+'633e2d62c31ac0ed271ce079', updatedUser)
+  //axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
   window.location.reload(false)
 }
 
@@ -106,7 +106,7 @@ function unFollow(name, user) {
     following: user.following
   }
 
-  //axios.post('http://localhost:5000/users/update/'+'633e2d62c31ac0ed271ce079', updatedUser)
+  //axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
   window.location.reload(false)
 }
 
