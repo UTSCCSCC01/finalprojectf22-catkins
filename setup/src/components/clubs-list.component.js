@@ -3,6 +3,21 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { isRouteErrorResponse } from 'react-router-dom';
 
+// Test user
+const user = 	{
+  "_id": "633e2d62c31ac0ed271ce079",
+  "username": "mario",
+  "password": "mariopassword",
+  "role": "student",
+  "following": [
+    "Badminton",
+    "Music Club"
+  ],
+  "createdAt": "2022-10-06T01:20:34.736Z",
+  "updatedAt": "2022-10-06T01:26:44.070Z",
+  "__v": 8
+}
+
 export default class ClubsList extends React.Component {
   state = {
     persons: []
@@ -24,21 +39,6 @@ export default class ClubsList extends React.Component {
       // console.table(resp.data[0]);
   });
   }, []);*/
-
-  //Test user for now
-  const user = 	{
-                  "_id": "633e2d62c31ac0ed271ce079",
-                  "username": "mario",
-                  "password": "mariopassword",
-                  "role": "student",
-                  "following": [
-                    "Badminton",
-                    "Music Club"
-                  ],
-                  "createdAt": "2022-10-06T01:20:34.736Z",
-                  "updatedAt": "2022-10-06T01:26:44.070Z",
-                  "__v": 8
-                }
   
   return (
     <div className="container">

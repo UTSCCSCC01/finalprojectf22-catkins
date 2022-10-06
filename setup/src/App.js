@@ -48,7 +48,6 @@ function App() {
         <Route path="clubs" element={<ClubsList/>} />
         <Route path="/clubs/testClub" element={<ClubsFeed/>} />
     </Routes>
-    </>
     </div>
     </div>
   );
