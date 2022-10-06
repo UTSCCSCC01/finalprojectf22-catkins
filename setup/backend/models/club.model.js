@@ -1,11 +1,9 @@
-//import User from "./user.model";
 const mongoose = require("mongoose");
-const { useReducer } = require("react");
 
 const Schema = mongoose.Schema;
 
 const clubSchema = new Schema({
-    name: {type: String, required: true},
+    clubName: {type: String, required: true},
     owner: { type: String, required: true},
     description: { type: String, required: true},
     // Set lis of tags

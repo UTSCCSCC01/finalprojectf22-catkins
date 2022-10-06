@@ -2,12 +2,23 @@ import React from 'react';
 import axios from 'axios';
 
 export default class ClubCreate extends React.Component {
-  state = {
+/*   state = {
     name: ''
   }
 
   handleChange = event => {
-    this.setState({ name: event.target.value });
+    console.log("name: " + name);
+    console.log("value: " + event.target.value);
+    this.setState({ 
+      name: event.target.value,
+     });
+  } */
+
+  handleChange = (e) => {
+    const{ name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
   }
 
   handleSubmit = event => {
@@ -15,15 +26,17 @@ export default class ClubCreate extends React.Component {
 
     const club = {
       owner: this.state.owner,
-      clubName: this.state.name,
+      clubName: this.state.clubName,
       description: this.state.description,
       clubTags: this.state.clubTags
     };
 
-    axios.post(`/clubs/create`, { club })
+    console.log(club);
+
+    axios.post(`http://localhost:5000/clubs/create`,  club)
       .then(res => {
-        console.log(res);
-        console.log(res.data);
+        console.log("res: " + res);
+        console.log("res.data: " + res.data);
       })
   }
 

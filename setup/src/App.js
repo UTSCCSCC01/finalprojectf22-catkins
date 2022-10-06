@@ -12,11 +12,11 @@ function App() {
     <div>
     <>
     <a href="/clubs">
-      Clubs list
+      Clubs List
     </a>
     <br></br>
     <a href="/clubs/create">
-        Clubs List
+        Create a Club
     </a>
     <Routes>
       <Route path="/clubs/create" element={<ClubCreate/>} />
