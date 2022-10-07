@@ -75,4 +75,19 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
+// Update the user
+router.route('/join').post((req, res) => {
+    Club.findOne({clubName: req.body.club_name})
+    .then(club => {
+        console.log(club)
+        if (!club.members.includes(req.body.username)){
+            club.members.push(req.body.username)
+        }
+
+        club.save()
+        .then(() => res.json("Club updated!"))
+        .catch(err => res.status(400).json("Error: " + err));
+    })
+});
+
 module.exports = router;

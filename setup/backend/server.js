@@ -39,8 +39,6 @@ app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/feed', feedRouter);
 
-app.use('/feed', feedRouter);
-
 
 // Starts listening to a PORT
 app.listen(port, () => {

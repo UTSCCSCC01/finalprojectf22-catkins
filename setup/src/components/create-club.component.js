@@ -38,6 +38,8 @@ export default class ClubCreate extends React.Component {
         console.log("res: " + res);
         console.log("res.data: " + res.data);
       })
+
+    window.location.reload(false)
   }
 
   render() {

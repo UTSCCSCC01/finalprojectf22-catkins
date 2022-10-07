@@ -7,7 +7,7 @@ function form_submission()
   console.log(content);
   alert('You have joined ' + content.club_name);
   
-  return fetch("/join/:id", {
+  return fetch("/join/", {
     method: "POST",
     body: content,
   });
