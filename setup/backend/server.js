@@ -31,6 +31,7 @@ const clubsRouter = require('./routes/clubs');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const feedRouter = require('./routes/feed');
+const { db } = require('./models/post.model');
 
 // When they go to /location, they will go to that router
 app.use('/clubs', clubsRouter);
@@ -45,3 +46,9 @@ app.use('/feed', feedRouter);
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
+
+app.post('/clubs', (req, res) =>{
+    db.collection('clubs').updateOne({_id: members}, {$push: {members: req.body}}).then(result=>{
+        res.status(201).json(result)
+    })
+})
