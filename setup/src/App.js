@@ -5,7 +5,7 @@ import pfp from './images/image.jpg';
 import ClubsFeed from './components/clubs-feed';
 
 import ClubsList from './components/clubs-list.component';
-import CreateClub from './components/create-club.component';
+import ClubCreate from './components/create-club.component';
 import CreateUser from './components/create-user.component';
 import EditClub from './components/edit-club.component';
 
@@ -44,12 +44,16 @@ function App() {
       <a href="/clubs/testClub">
         Update Club
       </a>
+      <a href='/clubs/create'>
+        Create a Club
+      </a>
 
       </nav>
 
       <Routes>
         <Route path="clubs" element={<ClubsList/>} />
         <Route path="/clubs/testClub" element={<ClubsFeed/>} />
+        <Route path="clubs/create" element={<ClubCreate/>} />
     </Routes>
 
     </div>
