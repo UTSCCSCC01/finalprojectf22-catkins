@@ -1,13 +1,15 @@
-Release Goal:
+Release Planning Meeting
+The goal of this meeting is to define a clear goal for the final release planning, the scope of the project and who participated. 
+
+Release Goal
 On December 2nd be able to provide a demo of a Minimum Viable Product (MVP) for our Product Owner and Stakeholders to demonstrate Catkins’ potential for being UTSC’s main Social Media Platform. 
 
-Deadline: 
-December 2nd 
+Deadline: December 2nd 
 
-Scope of the project:
+Scope of the project
 Implement a feed for all users to see posts from UTSC clubs and departments. Students can create their own clubs and also join other clubs to receive newsletters and meet other people. Professors are able to create private course forums where students can ask questions anonymously. Department representatives can create their department pages and post information about UTSC and events for students. 
 
-Releases:
+Releases
 4 Sprints of two weeks each. 
 
 Record of participants: 
