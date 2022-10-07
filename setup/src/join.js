@@ -1,8 +1,12 @@
 function form_submission()
 {
-  var club = document.getElementById("myform").elements.club_name.value;
+  var content = {club_name: document.getElementById("club_name").value,
+                  username: document.getElementById("username").value};//Get form info
+  console.log(content);
+  alert('You have joined ' + content.club_name);
   
-  alert('You have joined ' + club);
-  
-  return false;
+  return fetch("/join/:id", {
+    method: "POST",
+    body: content,
+  });
 }
