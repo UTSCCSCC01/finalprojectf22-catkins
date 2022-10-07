@@ -3,70 +3,55 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { isRouteErrorResponse } from 'react-router-dom';
 
-export default class ClubsList extends React.Component {
-  state = {
-    persons: []
-  }
+function ClubsList() {
 
-  componentDidMount() {
-    axios.get(`/clubs`)
-      .then(res => {
-        const clubs = res.data;
-        this.setState({ clubs });
-      })
-  }
+  // Used for setting states for our club variable
+  const [clubs, setClubs] = useState([{}]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/clubs').then(resp => {
 
-  /*const [user, setUser] = useState({});
+    setClubs(resp.data)
+      // console.table(resp.data[0]);
+  });
+  }, []);
+
+  // Used for setting states for our user variable
+  const [user, setUser] = useState({});
   useEffect(() => {
     axios.get('http://localhost:5000/users/'+'633eece780fabeb102d55acd').then(resp => {
 
     setUser(resp.data)
       // console.table(resp.data[0]);
   });
-  }, []);*/
-
-  //Test user for now
-  const user = 	{
-                  "_id": "633e2d62c31ac0ed271ce079",
-                  "username": "mario",
-                  "password": "mariopassword",
-                  "role": "student",
-                  "following": [
-                    "Badminton",
-                    "Music Club"
-                  ],
-                  "createdAt": "2022-10-06T01:20:34.736Z",
-                  "updatedAt": "2022-10-06T01:26:44.070Z",
-                  "__v": 8
-                }
+  }, []);
   
   return (
     <div className="container">
       <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Username</th>
+          <th>ClubName</th>
+          <th>Owner</th>
           <th>Description</th>
-          <th>ClubType</th>
+          <th>ClubTags</th>
         </tr>
       </thead>
       <tbody>
           {clubs.map((club) => {
-            let button = <button onClick={() => follow(club.name)}>Follow</button>
+            let button = <button onClick={() => follow(club.clubName)}>Follow</button>
             return(
-              <tr key={club.name}>
-                <th>{club.name}</th>
-                <th>{club.username}</th>
+              <tr key={club.clubName}>
+                <th>{club.clubName}</th>
+                <th>{club.owner}</th>
                 <th>{club.description}</th>
-                <th>{club.clubType}</th>
+                <th>{club.clubTags}</th>
 
                 {/* Create a follow or unfollow button for each corresponding club */}
                 {(() => {
-                  let button = <button onClick={() => follow(club.name, user)}>Follow</button>
+                  let button = <button onClick={() => follow(club.clubName, user)}>Follow</button>
                   if (user.following != undefined) {
-                    if (user.following.includes(club.name)) {
-                      button = <button onClick={() => unFollow(club.name, user)}>UnFollow</button>
+                    if (user.following.includes(club.clubName)) {
+                      button = <button onClick={() => unFollow(club.clubName, user)}>UnFollow</button>
                     }
                   }
                   return (
@@ -83,6 +68,7 @@ export default class ClubsList extends React.Component {
   );
 }
 
+// User will follow group name and be updated in database
 function follow(name, user) {
   if (!user.following.includes(name)){
     user.following.push(name)
@@ -94,10 +80,11 @@ function follow(name, user) {
     following: user.following
   }
 
-  //axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
+  axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
   window.location.reload(false)
 }
 
+// User will unfollow group name and be updated in database
 function unFollow(name, user) {
   if (user.following.includes(name)){
     user.following.splice(user.following.indexOf(name), 1);
@@ -109,7 +96,7 @@ function unFollow(name, user) {
     following: user.following
   }
 
-  //axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
+  axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
   window.location.reload(false)
 }
 

@@ -6,8 +6,12 @@ const postSchema = new Schema({
     title: {type: String, required: true},
     username: {type: String, required: true},
     group: {type: String, required: true},
-    description: {type: String, required: true},
-    public: {type: Boolean, required: true}
+    description: {type: String, required: true, default: ""},
+    public: {type: Boolean, required: true},
+
+    // Sorting priotity, higher int shown first
+        // Normal posts - 0, Questions - 1, Announcements - 2
+    priority: {type: Number, required: true, default: 0}
 }, {
     timestamps: true, //when was created/modified
 })

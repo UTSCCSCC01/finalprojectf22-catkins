@@ -16,6 +16,9 @@ import Left_Navbar from './components/navbars/Left_Navbar';
 function App() {
 
   return (
+
+
+
     <div className='h-screen w-screen flex flex-row'>
 
     <Left_Navbar />
@@ -48,11 +51,13 @@ function App() {
         <Route path="clubs" element={<ClubsList/>} />
         <Route path="/clubs/testClub" element={<ClubsFeed/>} />
     </Routes>
-    </>
+
     </div>
+
     </div>
+
+
   );
 }
-
 
 export default App;
