@@ -18,7 +18,11 @@ const userSchema = new Schema({
     role: {
         type: String,
         required: true
-    }
+    },
+    following : {
+        type: [String],
+        required: false
+    },
 }, {
     timestamps: true, //when was created/modified
 })

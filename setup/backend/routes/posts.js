@@ -25,6 +25,8 @@ router.route('/add').post((req, res) => {
     const username = req.body.username;
     const group = req.body.group;
     const description = req.body.description;
+    const public = req.body.public;
+    const priority = req.body.priority;
 
     // Check if club exists
     Club.find({name: group}, (err, clubs) => {
@@ -42,8 +44,10 @@ router.route('/add').post((req, res) => {
             const newPost = new Post({
                 title,
                 username,
-                group, 
-                description,   
+                group,
+                description,
+                public,
+                priority
             });
 
             // Save post to database
@@ -60,7 +64,7 @@ router.route('/add').post((req, res) => {
         }
     });
 
-    
+
 });
 
 // Get request post information based on URI
@@ -101,9 +105,11 @@ router.route('/update/:id').post((req, res) => {
         post.username = req.body.username;
         post.group = req.body.group;
         post.description = req.body.description;
+        post.public = req.body.public;
+        post.priority = req.body.public;
 
         post.save()
-        
+
         // Feedback
         .then(() => res.json("Post Edited"))
 

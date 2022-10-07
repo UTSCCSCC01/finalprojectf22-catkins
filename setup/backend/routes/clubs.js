@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let Club = require('../models/club.model');
 
+
 // Endpoint that takes care of http get requests
 router.route('/').get((req, res) => {
     // Finds all clubs from database
@@ -11,15 +12,16 @@ router.route('/').get((req, res) => {
 
 // Endpoint that takes care of http post requests
 router.route('/create').post((req, res) => {
+    console.log("Aqui?");
     // Request variables necessary
     const owner = req.body.owner;
-    const name = req.body.name;
+    const clubName = req.body.clubName;
     const description = req.body.description;
     const clubTags = req.body.clubTags;
 
     // Create new instance of club
     const newClub = new Club({
-        name,
+        clubName,
         owner, 
         description, 
         clubTags,    
@@ -29,15 +31,16 @@ router.route('/create').post((req, res) => {
     newClub.save()
         .then(() => res.json('Club added!'))
         .catch(err => res.status(400).json('Error: ' + err));
-
+    
+    console.log("Club Added!");
 });
 
 // Find club based on name
 router.route('/search').get((req, res) => {
     
-    const name = req.body.name;
+    const clubName = req.body.name;
     // Search
-    Club.find({name: name})
+    Club.find({clubName: clubName})
     .then(club => res.json(club))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -60,10 +63,10 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
     Club.findById(req.params.id)
     .then(club => {
-        club.name = req.body.name;
-        club.username = req.body.username;
+        club.owner = req.body.owner;
+        club.clubName = req.body.clubName;
         club.description = req.body.description;
-        club.clubType = req.body.clubType;
+        club.clubTags = req.body.clubTags;
 
         club.save()
         .then(() => res.json("Club updated!"))

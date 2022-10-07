@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-// helps connect to mongo.db 
+// helps connect to mongo.db
 const mongoose = require('mongoose');
 
 // Environment variables in .env file
@@ -38,6 +38,9 @@ app.use('/clubs', clubsRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/feed', feedRouter);
+
+app.use('/feed', feedRouter);
+
 
 // Starts listening to a PORT
 app.listen(port, () => {
