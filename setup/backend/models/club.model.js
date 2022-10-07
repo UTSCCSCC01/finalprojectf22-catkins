@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 
 const clubSchema = new Schema({
     name: {type: String, required: true},
-    owner: { type: String, required: true},
+    owner: { type: String, required: true},//username of owner
     description: { type: String, required: true},
-    // Set lis of tags
+    // Set list of tags
     clubTags: [{type: String, required: true}],
     // Set list of members
-    members: [{type: User, required: false}] 
+    members: [{type: String, required: false}] // elements are usernames
 }, {
     timestamps: true, //when was created/modified
 });
