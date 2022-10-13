@@ -18,13 +18,29 @@ router.route('/').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// Searching for posts by title
+router.route('/posts').get((req, res) => {
+
+    // Request post title
+    const title = req.body.title;
+
+    // Finds all posts from database that contain substring in title
+    Post.find({title: {$regex: title}}).sort({priority: -1, createdAt: -1})
+
+        // Json with posts
+        .then(posts => res.json(posts))
+
+        // Error catching
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // Searching for user by user name
 router.route('/users').get((req, res) => {
 
     // Request club name
     const username = req.body.username;
 
-    // Finds all users from database that are public or from following
+    // Finds all users from database that contain substring
     User.find({username: {$regex: username}}).sort({following: -1})
 
         // Json with users
@@ -40,7 +56,7 @@ router.route('/groups').get((req, res) => {
     // Request club name
     const clubName = req.body.clubName;
 
-    // Finds all groups from database that are public or from following
+    // Finds all groups from database that contain substring
     Club.find({clubName: {$regex: clubName}}).sort({members: -1})
 
         // Json with groups
