@@ -99,20 +99,6 @@ Routes
         Description
             Route for posts stored on the database including functions to add, remove, query, edit posts
 
-<<<<<<< HEAD
-=======
-	/search
-		Request handles
-			/search/
-				http get request returns a list of all clubs with no order in json format
-
-			/search/groups
-				http get request returns list of clubs sorted by most members first with clubName containing given string
-
-			/search/users
-				http get request
-
->>>>>>> parent of 15ed5cd1 (Delete doc directory)
     /users
         Request handlers
             /users/ 
@@ -132,7 +118,4 @@ Routes
 
             /users/update/:id
                 http update request edits user in the database given its id and a json body
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 15ed5cd1 (Delete doc directory)
