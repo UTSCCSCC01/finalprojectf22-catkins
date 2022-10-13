@@ -31,9 +31,6 @@ const clubsRouter = require('./routes/clubs');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const feedRouter = require('./routes/feed');
-const searchRouter = require('./routes/search');
-
-// Requiring the files
 const { db } = require('./models/post.model');
 
 // When they go to /location, they will go to that router
@@ -41,7 +38,7 @@ app.use('/clubs', clubsRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/feed', feedRouter);
-app.use('/search', searchRouter);
+
 
 // Starts listening to a PORT
 app.listen(port, () => {
