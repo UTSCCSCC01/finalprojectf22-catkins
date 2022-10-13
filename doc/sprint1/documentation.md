@@ -64,8 +64,10 @@ Routes
 
             /clubs/update/:id
                 http update request takes a json body with a schema matching the club model and updates the club corresponding to the given id with the new information
-	/clubs/join/:id
+	        
+            /clubs/join/:id
         	    http post request that takes a JSON body containing the club name club_name and username username and append username to members in club_name
+        
         Description
             Route for everything to do with clubs including creating, deleting, updating, and searching for clubs
 
@@ -98,6 +100,17 @@ Routes
 
         Description
             Route for posts stored on the database including functions to add, remove, query, edit posts
+
+    /search
+        Request handlers
+            /search/
+                http get request returns a list of all clubs with no particular order in json format
+            
+            /search/groups
+                http get request returns a list of all clubs where clubName contains given string parameter ordered by member count desc
+
+            /search/users
+                http get request returns a list of all users where username contains given string parameter ordered by number of groups they follow desc
 
     /users
         Request handlers
