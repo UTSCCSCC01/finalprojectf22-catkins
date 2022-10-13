@@ -38,9 +38,9 @@ router.route('/create').post((req, res) => {
 // Find club based on name
 router.route('/search').get((req, res) => {
     
-    const name = req.body.name;
+    const clubName = req.body.name;
     // Search
-    Club.find({name: name})
+    Club.find({clubName: clubName})
     .then(club => res.json(club))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -64,15 +64,30 @@ router.route('/update/:id').post((req, res) => {
     Club.findById(req.params.id)
     .then(club => {
         club.owner = req.body.owner;
-        club.name = req.body.name;
+        club.clubName = req.body.clubName;
         club.description = req.body.description;
-        club.clubType = req.body.clubType;
+        club.clubTags = req.body.clubTags;
 
         club.save()
         .then(() => res.json("Club updated!"))
         .catch(err => res.status(400).json("Error: " + err));
     })
     .catch(err => res.status(400).json("Error: " + err));
+});
+
+// Update the user
+router.route('/join').post((req, res) => {
+    Club.findOne({clubName: req.body.club_name})
+    .then(club => {
+        console.log(club)
+        if (!club.members.includes(req.body.username)){
+            club.members.push(req.body.username)
+        }
+
+        club.save()
+        .then(() => res.json("Club updated!"))
+        .catch(err => res.status(400).json("Error: " + err));
+    })
 });
 
 module.exports = router;

@@ -38,33 +38,38 @@ export default class ClubCreate extends React.Component {
         console.log("res: " + res);
         console.log("res.data: " + res.data);
       })
+
+    window.location.reload(false)
   }
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Owner Name:
-            <input type="text" name="owner" onChange={this.handleChange} />
+      <div class="ml-10">
+        <br></br>
+        <div class="text-5xl font-bold mt-0 mb-6"> Create your own club! </div>
+        <form onSubmit={this.handleSubmit} >
+          <label class="ml-10">
+            Owner Name: 
+            <input type="text" name="owner" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500" />
           </label>
           <br></br>
-          <label>
+          <label class="ml-10">
             Club Name:
-            <input type="text" name="clubName" onChange={this.handleChange} />
+            <input type="text" name="clubName" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500" />
           </label>
           <br></br>
-          <label>
+          <label class="ml-10">
             Club Description:
-            <input type="text" name="description" onChange={this.handleChange} />
+            <input type="text" name="description" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500"/>
           </label>
           <br></br>
-          <label>
+          <label class="ml-10">
             Club Tags:
-            <input type="text" name="clubTags" onChange={this.handleChange} />
+            <input type="text" name="clubTags" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500"/>
           </label>
           <br></br>
-          <button type="submit">Add</button>
+          <br></br>
+          <button type="submit" class="px-10 bg-[#ffffff] h-10 mx-2 border-2 border-[#D0D1C9] shadow-md">Add</button>
         </form>
       </div>
     )
