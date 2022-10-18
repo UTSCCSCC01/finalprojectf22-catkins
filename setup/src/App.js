@@ -9,6 +9,7 @@ import ClubCreate from './components/create-club.component';
 import CreateUser from './components/create-user.component';
 import EditClub from './components/edit-club.component';
 import ClubsJoin from './components/clubs-join.component';
+import PostCreate from './components/post-create.component';
 
 import axios from "axios";
 import React from 'react';
@@ -51,6 +52,9 @@ function App() {
       <a href='/clubs/join'>
         Join a Club
       </a>
+      <a href='/post/create'>
+        Create a Post
+      </a>
 
       </nav>
 
@@ -59,6 +63,7 @@ function App() {
         <Route path="/clubs/testClub" element={<ClubsFeed/>} />
         <Route path="clubs/create" element={<ClubCreate/>} />
         <Route path="clubs/join" element={<ClubsJoin/>} />
+        <Route path="post/create" element={<PostCreate/>} />
     </Routes>
 
     </div>
