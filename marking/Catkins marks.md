@@ -47,7 +47,7 @@ Planning Meetings Total Mark: 3 / 5
   - 1 mark = At least 2 group members or more have not sent their updates or is low-quality
   - 0 marks = At least 3 group members or more have not sent their updates or is low-quality
 
-Daily Stand-ups Total Mark: 0 / 10
+Daily Stand-ups Total Mark: 10 / 10
 
 ---
 
@@ -240,7 +240,7 @@ Your Mark: 20 / 20
 - 1 mark = documentation has been created for frontend and backend systems with some errors
 - 0 marks = documentation has not been created
 
-Your Mark: \_\_ / 14
+Your Mark: 14 / 14
 
 ---
 
@@ -248,4 +248,4 @@ Note: Your mark will be updated after the demo is finished
 
 ## Total Mark
 
-52 / 89
+76 / 89
