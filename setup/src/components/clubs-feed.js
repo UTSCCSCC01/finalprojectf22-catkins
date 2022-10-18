@@ -28,7 +28,6 @@ function ClubsFeed() {
   });
   }, []);
 
-  console.log("ZDES")
   return (
     <div className="flex flex-col items-center h-screen">
      {clubsFeed.map((item) => { 
