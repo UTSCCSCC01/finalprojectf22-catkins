@@ -22,12 +22,6 @@ export default class PostCreate extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    let actualPublic = false
-    if (this.state.public == "true")
-        actualPublic = true
-    else
-        actualPublic = false
-
     const post = {
       title: this.state.title,
       username: this.state.username,
