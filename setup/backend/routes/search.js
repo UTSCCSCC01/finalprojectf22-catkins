@@ -20,9 +20,8 @@ router.route('/').get((req, res) => {
 
 // Searching for posts by title
 router.route('/posts').get((req, res) => {
-
     // Request post title
-    const title = req.body.title || req.query.title;
+    const title = req.query.postTitle;
 
     // Finds all posts from database that contain substring in title
     Post.find({title: {$regex: title}}).sort({priority: -1, createdAt: -1})
@@ -32,7 +31,8 @@ router.route('/posts').get((req, res) => {
 
         // Error catching
         .catch(err => res.status(400).json('Error: ' + err));
-});
+}
+);
 
 // Searching for user by user name
 router.route('/users').get((req, res) => {
@@ -52,6 +52,7 @@ router.route('/users').get((req, res) => {
 
 // Searching for groups by club name
 router.route('/groups').get((req, res) => {
+
 
     // Request club name and tags
     const clubName = req.body.clubName || req.query.clubName || 'GROUPS CANNOT BE NAMED THIS EXACT PHRASE'; // If no clubName found assume only tags search

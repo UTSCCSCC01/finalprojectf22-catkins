@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { isRouteErrorResponse } from 'react-router-dom';
+import SearchBar from './reusable_components/Search_bar';
 
 function ClubsList() {
 
@@ -15,6 +16,20 @@ function ClubsList() {
   });
   }, []);
 
+  const submitFunction = (e) => {
+    e.preventDefault()
+
+    const groupName = e.target[0].value
+    console.log(groupName)
+    axios.get('http://localhost:5000/search/groups', { params: {
+      clubName: groupName
+    } }).then(res => {
+      console.log(res.data)
+    setClubs(res.data)
+
+    });
+  }
+
   // Used for setting states for our user variable
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -24,9 +39,13 @@ function ClubsList() {
       // console.table(resp.data[0]);
   });
   }, []);
-  
+
   return (
-    <div className="container">
+
+    <div className="flex flex-col items-center h-screen">
+
+    <SearchBar submitFunction={submitFunction}/>
+
       <table>
       <thead>
         <tr>
@@ -60,8 +79,8 @@ function ClubsList() {
                 })()}
 
               </tr>
-            ); 
-          })};
+            );
+          })}
         </tbody>
     </table>
     </div>
