@@ -13,6 +13,7 @@ import ClubsJoin from './components/clubs-join.component';
 import axios from "axios";
 import React from 'react';
 import Left_Navbar from './components/navbars/Left_Navbar';
+import Top_Navbar from './components/navbars/Top_Navbar';
 
 function App() {
 
@@ -29,30 +30,7 @@ function App() {
 
     <div className='flex flex-col h-screen my-7 w-screen '>
 
-      <nav className='flex justify-around items-center h-10 border-2 border-[#D0D1C9] shadow-md'>
-
-      <a href="/clubs">
-        Clubs List
-      </a>
-
-      <a href="/users" >
-        Users List
-      </a>
-
-      <a href="/clubs/update/:id" >
-        Update Club
-      </a>
-      <a href="/clubs/testClub">
-        Feed
-      </a>
-      <a href='/clubs/create'>
-        Create a Club
-      </a>
-      <a href='/clubs/join'>
-        Join a Club
-      </a>
-
-      </nav>
+      <Top_Navbar/>
 
       <Routes>
         <Route path="clubs" element={<ClubsList/>} />

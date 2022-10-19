@@ -20,9 +20,8 @@ router.route('/').get((req, res) => {
 
 // Searching for posts by title
 router.route('/posts').get((req, res) => {
-
     // Request post title
-    const title = req.body.title;
+    const title = req.query.postTitle;
 
     // Finds all posts from database that contain substring in title
     Post.find({title: {$regex: title}}).sort({priority: -1, createdAt: -1})
@@ -32,7 +31,8 @@ router.route('/posts').get((req, res) => {
 
         // Error catching
         .catch(err => res.status(400).json('Error: ' + err));
-});
+}
+);
 
 // Searching for user by user name
 router.route('/users').get((req, res) => {
@@ -54,7 +54,7 @@ router.route('/users').get((req, res) => {
 router.route('/groups').get((req, res) => {
 
     // Request club name
-    const clubName = req.body.clubName;
+    const clubName = req.query.clubName;
 
     // Finds all groups from database that contain substring
     Club.find({clubName: {$regex: clubName}}).sort({members: -1})
