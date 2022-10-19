@@ -107,13 +107,16 @@ Routes
                 http get request returns a list of all clubs with no particular order in json format
 
             /search/posts
-                http get request returns a list of all posts where title contains given string parameter ordered by priority then date created desc
+                http get request returns a list of all posts where title contains given string parameter (body or query) ordered by priority then date created desc 
 
             /search/users
-                http get request returns a list of all users where username contains given string parameter ordered by number of groups they follow desc
+                http get request returns a list of all users where username contains given string parameter (body or query) ordered by number of groups they follow desc
             
             /search/groups
-                http get request returns a list of all clubs where clubName contains given string parameter ordered by member count desc
+                http get request returns a list of all clubs where (body or query)
+                    if given both clubName string and clubTags array of strings will return results that substring match clubName and contain all given clubTags
+                    if given only clubName will return results that substring match clubName
+                    if given only clubTags will return results that match all given clubtags
 
         Description
             Route for all search requests made by the user
