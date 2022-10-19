@@ -28,14 +28,13 @@ function ClubsFeed() {
   });
   }, []);
 
-  console.log("ZDES")
   return (
     <div className="flex flex-col items-center h-screen">
      {clubsFeed.map((item) => { 
        console.log(user)
 
        // If statement to so that users would only see post from groups that they are following
-        if (user.following != undefined && user.following.includes(item.group)) {
+        if ((user.following != undefined && user.following.includes(item.group)) || item.public == true) {
           return <ClubsPost group={item.group} title={item.title} createdAt={item.createdAt} username={item.username} description={item.description}/>
         }
       })}
