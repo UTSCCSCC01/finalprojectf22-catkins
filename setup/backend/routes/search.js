@@ -22,7 +22,7 @@ router.route('/').get((req, res) => {
 router.route('/posts').get((req, res) => {
 
     // Request post title
-    const title = req.body.title;
+    const title = req.body.title || req.query.title;
 
     // Finds all posts from database that contain substring in title
     Post.find({title: {$regex: title}}).sort({priority: -1, createdAt: -1})
@@ -38,7 +38,7 @@ router.route('/posts').get((req, res) => {
 router.route('/users').get((req, res) => {
 
     // Request club name
-    const username = req.body.username;
+    const username = req.body.username || req.query.username;
 
     // Finds all users from database that contain substring
     User.find({username: {$regex: username}}).sort({following: -1})
@@ -53,17 +53,32 @@ router.route('/users').get((req, res) => {
 // Searching for groups by club name
 router.route('/groups').get((req, res) => {
 
-    // Request club name
-    const clubName = req.body.clubName;
+    // Request club name and tags
+    const clubName = req.body.clubName || req.query.clubName || 'GROUPS CANNOT BE NAMED THIS EXACT PHRASE'; // If no clubName found assume only tags search
+    const clubTags = req.body.clubTags || req.query.clubTags || []; // If no clubTags found assume only name search
 
-    // Finds all groups from database that contain substring
-    Club.find({clubName: {$regex: clubName}}).sort({members: -1})
+    if (Array.isArray(clubTags) && clubTags.length) {
 
-        // Json with groups
-        .then(clubs => res.json(clubs))
+        // Finds all groups from database that contain substring or all tags
+        Club.find({$and: [{clubName: {$regex: clubName}}, {clubTags: {$all: clubTags}}]}).sort({members: -1})
 
-        // Error catching
-        .catch(err => res.status(400).json('Error: ' + err));
+            // Json with groups
+            .then(clubs => res.json(clubs))
+
+            // Error catching
+            .catch(err => res.status(400).json('Error: ' + err));
+
+    } else {
+
+        // Search only name no tags
+        Club.find({clubName: {$regex: clubName}}).sort({members: -1})
+
+            // Json with groups
+            .then(clubs => res.json(clubs))
+
+            // Error catching
+            .catch(err => res.status(400).json('Error: ' + err));
+    }
 });
 
 // Exporting router
