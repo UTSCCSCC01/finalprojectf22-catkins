@@ -1,106 +1,75 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import ClubsPost from './clubs-post';
-import Clubs from './clubs';
+import React, { useEffect, useState} from 'react';
+import {Link } from 'react-router-dom';
+
+handleChange = (e) => {
+    const{ name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleSubmit = event => {
+    var url = window.location.href;
+    var clubId = url.split("/").pop();
+
+    // Used for setting states for our club variable
+    const [clubs, setClubs] = useState([{}]);
+    useEffect(() => {
+      axios.get('http://localhost:5000/clubs/' + clubId).then(resp => {
+      setClubs(resp.data)
+      console.table(resp.data[0]);
+    });
+    }, []);
 
 function ClubPage() {
+        event.preventDefault();
+    
+        const post = {
+          title: this.state.Title,
+          username: "Amu",
+          group: clubId,
+          description: this.state.Description,
+          public: this.state.Public,
+          priority: 0
+        };
+    
+        console.log(post);
+    
+        axios.post(`http://localhost:5000/posts/add`,  post)
+          .then(res => {
+            console.log("res: " + res);
+            console.log("res.data: " + res.data);
+          })
+    
+        window.location.reload(false)
+      }
+    
+        return (
+            
+          <div class="ml-10">
+            {/* Allow user to add their posts */}
+            <div class="text-5xl font-bold mt-0 mb-6"> Let your voice be heard! </div>
+            <form onSubmit={this.handleSubmit} >
+              <label class="ml-10">
+                Title 
+                <input type="text" name="Title" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500" />
+              </label>
+                <input type="text" name="Description" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500" />
+              <br></br>
+              <label class="ml-10">
+                Members only:
+                <input type={"checkbox"} name="Public" onChange={this.handleChange}/>
+              </label>
+              <button type="submit" class="px-10 bg-[#ffffff] h-10 mx-2 border-2 border-[#D0D1C9] shadow-md">Add</button>
+            </form>
+    
+    
+            {/* List all posts from club */}
+          </div>
+        )
+      }
 
-  // Used for setting states for our club variable
-  const [clubs, setClubs] = useState([{}]);
-  useEffect(() => {
-    axios.get('http://localhost:5000/clubs/:id').then(resp => {
 
-    setClubs(resp.data)
-    console.table(resp.data[0]);
-  });
-  }, []);
-
-  // Used for setting states for our user variable
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    axios.get('http://localhost:5000/users/'+'633eece780fabeb102d55acd').then(resp => {
-
-    setUser(resp.data)
-      // console.table(resp.data[0]);
-  });
-  }, []);
-  
-  return (
-    <div className="container">
-      <table>
-      <thead>
-        {/*Header of Clubs List*/}
-        <tr>
-          <th>Club Name</th>
-          <th>Owner</th>
-          <th>Description</th>
-          <th>Club Tags</th>
-          <br></br>
-        </tr>
-      </thead>
-      <tbody>
-          {clubs.map((club) => {
-            let button = <button onClick={() => follow(club.clubName)}>Follow</button>
-            return(
-              <tr key={club.clubName}>
-                <Link to={`/${club._id}`}>{club.clubName}</Link>                
-                <th>{club.clubName}</th>
-                <th>{club.owner}</th>
-                <th>{club.description}</th>
-                <th>{club.clubTags}</th>
-
-                {/* Create a follow or unfollow button for each corresponding club */}
-                {(() => {
-                  let button = <button onClick={() => follow(club.clubName, user)}>Follow</button>
-                  if (user.following != undefined) {
-                    if (user.following.includes(club.clubName)) {
-                      button = <button onClick={() => unFollow(club.clubName, user)}>UnFollow</button>
-                    }
-                  }
-                  return (
-                    button
-                  )
-                })()}
-
-              </tr>
-            ); 
-          })};
-        </tbody>
-    </table>
-    </div>
-  );
-}
-
-// User will follow group name and be updated in database
-function follow(name, user) {
-  if (!user.following.includes(name)){
-    user.following.push(name)
-  }
-  const updatedUser = {
-    username: user.username,
-    password: user.password,
-    role: user.role,
-    following: user.following
-  }
-
-  axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
-  window.location.reload(false)
-}
-
-// User will unfollow group name and be updated in database
-function unFollow(name, user) {
-  if (user.following.includes(name)){
-    user.following.splice(user.following.indexOf(name), 1);
-  }
-  const updatedUser = {
-    username: user.username,
-    password: user.password,
-    role: user.role,
-    following: user.following
-  }
-
-  axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
-  window.location.reload(false)
-}
 
 export default ClubPage;

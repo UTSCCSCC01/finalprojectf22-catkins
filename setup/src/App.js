@@ -6,6 +6,7 @@ import ClubsFeed from './components/clubs-feed';
 
 import ClubsList from './components/clubs-list.component';
 import ClubCreate from './components/create-club.component';
+import ClubPage from './components/club-page.component';
 import CreateUser from './components/create-user.component';
 import EditClub from './components/edit-club.component';
 import ClubsJoin from './components/clubs-join.component';
@@ -18,44 +19,31 @@ import Left_Navbar from './components/navbars/Left_Navbar';
 function App() {
 
   return (
-
-
-
     <div className='h-screen w-screen flex flex-row'>
-
+    {/* Add Navbar on the left to be always on display */}
     <Left_Navbar />
 
-    {/* div for chat button */}
-
-
+    {/* Navbar on the top to be always on display */}
     <div className='flex flex-col h-screen my-7 w-screen '>
-
       <nav className='flex justify-around items-center h-10 border-2 border-[#D0D1C9] shadow-md'>
-
-      <a href="/clubs">
-        Clubs List
-      </a>
-
-      <a href="/users" >
-        Users List
-      </a>
-
-      <a href="/clubs/update/:id" >
-        Update Club
-      </a>
-      <a href="/clubs/testClub">
-        Feed
-      </a>
-      <a href='/clubs/create'>
-        Create a Club
-      </a>
-      <a href='/clubs/join'>
-        Join a Club
-      </a>
-      <a href='/post/create'>
-        Create a Post
-      </a>
-
+        <a href="/clubs">
+          Clubs List
+        </a>
+        <a href="/users" >
+          Users List
+        </a>
+        <a href="/clubs/testClub">
+          Feed
+        </a>
+        <a href='/clubs/create'>
+          Create a Club
+        </a>
+        <a href='/clubs/join'>
+          Join a Club
+        </a>
+        <a href='/post/create'>
+          Create a Post
+        </a>
       </nav>
 
       <Routes>
@@ -64,13 +52,10 @@ function App() {
         <Route path="clubs/create" element={<ClubCreate/>} />
         <Route path="clubs/join" element={<ClubsJoin/>} />
         <Route path="post/create" element={<PostCreate/>} />
-    </Routes>
-
+        <Route path="clubs/:id" element={<ClubPage/>} />
+      </Routes>
     </div>
-
     </div>
-
-
   );
 }
 

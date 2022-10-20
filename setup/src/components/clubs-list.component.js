@@ -10,7 +10,7 @@ function ClubsList() {
     axios.get('http://localhost:5000/clubs').then(resp => {
 
     setClubs(resp.data)
-      // console.table(resp.data[0]);
+    //console.table(resp.data[0]);
   });
   }, []);
 
@@ -42,7 +42,7 @@ function ClubsList() {
             let button = <button onClick={() => follow(club.clubName)}>Follow</button>
             return(
               <tr key={club.clubName}>
-                <Link to={`/${club._id}`}>{club.clubName}</Link>                
+                <Link to={`/clubs/${club._id}`}>{club.clubName}</Link>                
                 <th>{club.clubName}</th>
                 <th>{club.owner}</th>
                 <th>{club.description}</th>
