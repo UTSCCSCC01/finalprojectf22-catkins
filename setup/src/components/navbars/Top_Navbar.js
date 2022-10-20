@@ -14,7 +14,7 @@ function Top_Navbar () {
 <a href="/clubs/update/:id" >
   Update Club
 </a>
-<a href="/clubs/testClub">
+<a href="/clubs/clubsFeed">
   Feed
 </a>
 <a href='/clubs/create'>

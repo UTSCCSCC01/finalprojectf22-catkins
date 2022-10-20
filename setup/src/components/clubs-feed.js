@@ -42,7 +42,7 @@ function ClubsFeed() {
 
   return (
     <div className="flex flex-col items-center h-screen">
-      <SearchBar submitFunction={submitFunction}/>
+      <SearchBar submitFunction={submitFunction} placeholder={"Search posts by their titles"}/>
      {clubsFeed.map((item) => {
 
        // If statement to so that users would only see post from groups that they are following

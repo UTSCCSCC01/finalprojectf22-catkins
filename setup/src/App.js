@@ -15,6 +15,7 @@ import axios from "axios";
 import React from 'react';
 import Left_Navbar from './components/navbars/Left_Navbar';
 import Top_Navbar from './components/navbars/Top_Navbar';
+import UsersList from './components/users_list';
 
 function App() {
 
@@ -36,10 +37,11 @@ function App() {
 
       <Routes>
         <Route path="clubs" element={<ClubsList/>} />
-        <Route path="/clubs/testClub" element={<ClubsFeed/>} />
+        <Route path="/clubs/clubsFeed" element={<ClubsFeed/>} />
         <Route path="clubs/create" element={<ClubCreate/>} />
         <Route path="clubs/join" element={<ClubsJoin/>} />
         <Route path="post/create" element={<PostCreate/>} />
+        <Route path="users" element={<UsersList/>} />
     </Routes>
 
     </div>

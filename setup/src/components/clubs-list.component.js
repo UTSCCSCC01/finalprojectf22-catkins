@@ -44,7 +44,7 @@ function ClubsList() {
 
     <div className="flex flex-col items-center h-screen">
 
-    <SearchBar submitFunction={submitFunction}/>
+    <SearchBar submitFunction={submitFunction} placeholder={"Search clubs by their names"}/>
 
       <table>
       <thead>

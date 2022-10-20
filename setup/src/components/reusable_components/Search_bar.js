@@ -8,7 +8,7 @@ function SearchBar(props) {
     <form onSubmit={props.submitFunction} className="flex justify-between">
 
 <div className="w-11/12">
-<input type="text" name="postTitle" placeholder="Search by post title" className="w-full mb-1"/>
+<input type="text" name="postTitle" placeholder={props.placeholder} className="w-full mb-1"/>
 <hr className="w-full border-[#D0D1C9]"/>
 </div>
 
