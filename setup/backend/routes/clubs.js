@@ -12,7 +12,6 @@ router.route('/').get((req, res) => {
 
 // Endpoint that takes care of http post requests
 router.route('/create').post((req, res) => {
-    console.log("Aqui?");
     // Request variables necessary
     const owner = req.body.owner;
     const clubName = req.body.clubName;

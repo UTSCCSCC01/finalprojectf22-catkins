@@ -1,16 +1,17 @@
 import axios from 'axios';
-import React, { useEffect, useState} from 'react';
-import {Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import ClubsPost from './clubs-post';
+import Clubs from './clubs';
 
-function ClubsList() {
+function ClubPage() {
 
   // Used for setting states for our club variable
   const [clubs, setClubs] = useState([{}]);
   useEffect(() => {
-    axios.get('http://localhost:5000/clubs').then(resp => {
+    axios.get('http://localhost:5000/clubs/:id').then(resp => {
 
     setClubs(resp.data)
-      // console.table(resp.data[0]);
+    console.table(resp.data[0]);
   });
   }, []);
 
@@ -102,4 +103,4 @@ function unFollow(name, user) {
   window.location.reload(false)
 }
 
-export default ClubsList;
+export default ClubPage;
