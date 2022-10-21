@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 export default class ClubCreate extends React.Component {
-
   handleChange = (e) => {
     const{ name, value } = e.target;
     this.setState({

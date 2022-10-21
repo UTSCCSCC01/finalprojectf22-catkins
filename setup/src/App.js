@@ -6,6 +6,7 @@ import ClubsFeed from './components/clubs-feed';
 
 import ClubsList from './components/clubs-list.component';
 import ClubCreate from './components/create-club.component';
+import ClubPage from './components/club-page.component';
 import CreateUser from './components/create-user.component';
 import EditClub from './components/edit-club.component';
 import ClubsJoin from './components/clubs-join.component';
@@ -20,16 +21,11 @@ import UsersList from './components/users_list';
 function App() {
 
   return (
-
-
-
     <div className='h-screen w-screen flex flex-row'>
-
+    {/* Add Navbar on the left to be always on display */}
     <Left_Navbar />
 
-    {/* div for chat button */}
-
-
+    {/* Navbar on the top to be always on display */}
     <div className='flex flex-col h-screen my-7 w-screen '>
 
       <Top_Navbar/>
@@ -42,13 +38,10 @@ function App() {
         <Route path="clubs/join" element={<ClubsJoin/>} />
         <Route path="post/create" element={<PostCreate/>} />
         <Route path="users" element={<UsersList/>} />
-    </Routes>
-
+        <Route path="clubs/:id" element={<ClubPage/>} />
+      </Routes>
     </div>
-
     </div>
-
-
   );
 }
 
