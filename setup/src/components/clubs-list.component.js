@@ -3,11 +3,17 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { isRouteErrorResponse } from 'react-router-dom';
 import SearchBar from './reusable_components/Search_bar';
+import SearchInterface from './search_interfaces/clubs-list-search-interface';
 
 function ClubsList() {
 
   // Used for setting states for our club variable
   const [clubs, setClubs] = useState([{}]);
+
+  const changeClubsList = (dataToReplaceWith) => {
+    setClubs(dataToReplaceWith)
+  }
+
   useEffect(() => {
     axios.get('http://localhost:5000/clubs').then(resp => {
 
@@ -17,7 +23,7 @@ function ClubsList() {
   }, []);
 
   const submitFunction = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const groupName = e.target[0].value
     console.log(groupName)
@@ -43,8 +49,7 @@ function ClubsList() {
   return (
 
     <div className="flex flex-col items-center h-screen">
-
-    <SearchBar submitFunction={submitFunction} placeholder={"Search clubs by their names"}/>
+      <SearchInterface listChangeFunction={changeClubsList} />
 
       <table>
       <thead>

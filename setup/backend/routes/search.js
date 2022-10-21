@@ -59,7 +59,6 @@ router.route('/groups').get((req, res) => {
     const clubTags = req.body.clubTags || req.query.clubTags || []; // If no clubTags found assume only name search
 
     if (Array.isArray(clubTags) && clubTags.length) {
-
         // Finds all groups from database that contain substring or all tags
         Club.find({$and: [{clubName: {$regex: clubName}}, {clubTags: {$all: clubTags}}]}).sort({members: -1})
 
