@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, setState} from 'react';
+import React, { useEffect, useState, setState, Fragment} from 'react';
 import ClubsPost from './clubs-post';
 
 function ClubPage() {
@@ -7,7 +7,7 @@ function ClubPage() {
   var url = window.location.href;
   var clubId = url.split("/").pop();
   // Need sessions
-  var currentUser = "mario"
+  var currentUser = "mario";
 
  // Getting Specific club data
  const [club, setClub] = useState([{}]);
@@ -26,11 +26,25 @@ function ClubPage() {
   }, [club]);
 
   // Handle User Input
-  const handleChange = (e) => {
+  /*const handleChange = (e) => {
     const{ name, value } = e.target;
     setState({
       [name]: value,
     });
+  }*/
+
+  const [form, setForm] = useState({});
+  useEffect(() => {
+    console.log(form);
+  }, [form])
+
+  function handleChange(e) {
+    // Grab the id and value from the input
+    const { id, value } = e.target;
+
+    // Create a new object by spreading out the current form
+    // state, and setting the state property to the new value
+    setForm({ ...form, [id]: value });
   }
 
   const handleSubmit = event => {
@@ -38,21 +52,21 @@ function ClubPage() {
 
     // Store Public Setting
     let actualPublic = false
-    if (this.state.Public == "true")
+    if (form.Public == "true")
         actualPublic = true
     else
         actualPublic = false
 
     const post = {
-      title: this.state.Title,
+      title: form.Title,
       username: currentUser,
       group: club.clubName,
-      description: this.state.Description,
+      description: form.Description,
       public: actualPublic,
-      priority: Number(this.state.Priority)
+      priority: Number(form.Priority)
     };
 
-    console.log(post);
+    console.log("POST: " + post);
 
     axios.post(`http://localhost:5000/posts/add`,  post)
       .then(res => {
@@ -66,10 +80,12 @@ function ClubPage() {
 
   // Allow user to see post submission if they are the owner
   // O/W just load posts
+  var isOwner = false;
   if (currentUser == club.owner) {
-    console.log("Owner!")
+    console.log("Owner!");
+    isOwner = true;
   } else {
-    console.log("Not Owner")
+    console.log("Not Owner");
   }
 
  return (
@@ -79,49 +95,53 @@ function ClubPage() {
     {club.description}
 
     {/* Allow user to add their posts */}
-    <div class="text-2xl font-bold mt-0 mb-6"> Let your voice be heard! </div>
+
+    {isOwner == true && (
+      <Fragment>
+    <div class='text-2xl font-bold mt-0 mb-6}'> Let your voice be heard! </div>
     <form onSubmit={handleSubmit}>
       <label class="ml-10">
         Title 
-        <input type="text" name="Title" onChange={handleChange}  class="ml-10 rounded-md border-2 border-rose-500" />
+        <input type="text" id="Title" name="Title" onChange={handleChange}  class="ml-10 rounded-md border-2 border-rose-500" />
       </label>
       <br/>
       <label class="ml-10">
         Description
-      <input type="text" name="Description" onChange={handleChange}  class="ml-10 rounded-md border-2 border-rose-500" />
+      <input type="text"  id="Description" name="Description" onChange={handleChange}  class="ml-10 rounded-md border-2 border-rose-500" />
       </label>
       <br/>
       <label class="ml-10">
         Public:
-          <div name="Public" onChange={handleChange} style={{ display: "inline" }}>
-            <input type="radio" value="true" name="public"/> Yes
-            <input type="radio" value="false" name="public"/> No
+          <div name="Public" id="Public" onChange={handleChange} style={{ display: "inline" }}>
+            <input type="radio" value="true" id="Public" name="public"/> Yes
+            <input type="radio" value="false" id="Public" name="public"/> No
           </div>
       </label>
       <br/>
       <label class="ml-10">
         Type:
-        <div name="Priority" onChange={handleChange} style={{ display: "inline" }}>
-            <input type="radio" value="0" name="priority"/> Post
-            <input type="radio" value="1" name="priority"/> Question
-            <input type="radio" value="2" name="priority"/> Announcement
+        <div name="Priority" id="Priority" onChange={handleChange} style={{ display: "inline" }}>
+            <input type="radio" value="0" id="Priority" name="priority"/> Post
+            <input type="radio" value="1" id="Priority" name="priority"/> Question
+            <input type="radio" value="2" id="Priority" name="priority"/> Announcement
           </div>
       </label>
       <br/>
       <button type="submit" class="px-10 bg-[#ffffff] h-10 mx-2 border-2 border-[#D0D1C9] shadow-md">Post</button>
     </form>
-
+    </Fragment>)}
 
     {/* List all posts from club */}
     <div className="flex flex-col items-center h-screen">
       {clubsFeed.map((item) => { 
-        // If statement to so that users would only see post from groups that they are following
         return <ClubsPost group={item.group} title={item.title} createdAt={item.createdAt} username={item.username} description={item.description}/>
       })}
 
     </div>
 
+    
   </div>
+  
 );
 }
 

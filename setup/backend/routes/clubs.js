@@ -99,6 +99,9 @@ router.route("/:clubName/posts").get((req, res) => {
 
     // Finds post
     Post.find({"group": req.params.clubName})
+    
+    // Sort in chronological + importance
+    .sort({priority: -1, createdAt: -1})
 
     // Json with post
     .then(post => res.json(post))
