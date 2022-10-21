@@ -34,4 +34,4 @@ function Login() {
     </div>
   );
 }
-export default ClubsJoin;
+export default Login;
