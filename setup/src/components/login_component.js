@@ -16,9 +16,6 @@ function Login() {
   }
   return (
     <div className="main">
-      <div className="image">
-        <img src="..//static/img/logo.png" alt="Class logo" />
-      </div>
       <div className="form">
         <form method="post" onSubmit={Login}>
           <h2>Login</h2>
