@@ -1,6 +1,8 @@
 const router = require('express').Router();
-let Club = require('../models/club.model');
 
+// Mongo model
+let Club = require('../models/club.model');
+let Post = require('../models/post.model');
 
 // Endpoint that takes care of http get requests
 router.route('/').get((req, res) => {
@@ -46,14 +48,17 @@ router.route('/search').get((req, res) => {
 
 // Get information about the club on the URI
 router.route("/:id").get((req, res) => {
+    console.log(req.params.id);
     Club.findById(req.params.id)
     .then(club => res.json(club))
     .catch(err => res.status(400).json("Error: " + err));
+
 });
 
 // delete the club with that id
 router.route('/:id').delete((req, res) => {
     Club.findByIdAndDelete(req.params.id)
+
     .then(() => res.json("Club deleted."))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -87,6 +92,19 @@ router.route('/join').post((req, res) => {
         .then(() => res.json("Club updated!"))
         .catch(err => res.status(400).json("Error: " + err));
     })
+});
+
+// Get all posts com specific club
+router.route("/:clubName/posts").get((req, res) => {
+
+    // Finds post
+    Post.find({"group": req.params.clubName})
+
+    // Json with post
+    .then(post => res.json(post))
+
+    // Error catching
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;

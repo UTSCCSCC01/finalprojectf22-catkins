@@ -34,7 +34,6 @@ function ClubsList() {
           <th>Owner</th>
           <th>Description</th>
           <th>Club Tags</th>
-          <br></br>
         </tr>
       </thead>
       <tbody>

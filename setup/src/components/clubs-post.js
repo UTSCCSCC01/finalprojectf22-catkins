@@ -3,7 +3,7 @@ import pfp from '../images/image.jpg';
 import iphone from '../images/iphone.png';
 
 function ClubsPost(props) {
-  console.log("TUT")
+  //console.log("TUT")
 
   return (
     <div className=' mt-20  w-2/3 border-2 border-[#D0D1C9]  h-1/2'>
