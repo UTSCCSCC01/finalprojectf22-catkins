@@ -1,0 +1,144 @@
+/*import icons*/
+
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+/*removes default margin for all*/
+
+* {
+    margin: 0;
+}
+
+/*sets backgroud color and image*/
+
+body {
+    color: #f0f0f0;
+}
+
+.main {
+    background-image: url(img/1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+/*Center the logo bar,set background color*/
+
+.image {
+    background-color: #323334;
+}
+
+.image>img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*style for login form*/
+
+.form {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin: 20px auto;
+    border-radius: 5px;
+    background-color: transparent;
+    width: 100%;
+}
+
+.form>form {
+    letter-spacing: 2px;
+    text-align: center;
+    width: 350px;
+    margin: auto;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/*style for text input fields*/
+
+.text {
+    width: 70%;
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 0;
+    border-bottom: 2px #f0f0f0 solid;
+}
+
+.text>i, input {
+    margin: 1px 5px;
+}
+
+.form input[type="text"], input[type="password"] {
+    font-size: 16px;
+    display: block;
+    color: #f0f0f0;
+    background-color: transparent;
+    outline-style: none;
+    border: none;
+}
+
+/*placeholder style*/
+
+.form input[type="text"]::placeholder, input[type="password"]::placeholder {
+    color: #f0f0f0;
+    letter-spacing: 1px;
+}
+
+/*sytle for login button*/
+
+.form input[type="submit"] {
+    text-align: center;
+    background-color: transparent;
+    border: 2px #f0f0f0 solid;
+    border-radius: 100px;
+    padding: 5px;
+    width: 50%;
+    color: #f0f0f0;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, width 0.3s ease, font-weight 0.35s ease-in-out;
+}
+
+/*hover effects for login button*/
+
+.form input[type="submit"]:hover {
+    background-color: #f0f0f0;
+    color: #323334;
+    width: 100%;
+    cursor: pointer;
+}
+
+/*style for create account link*/
+
+.form>form>p {
+    margin: 8px 0;
+    border-bottom: 1px transparent solid;
+    transition: border-color 0.35s ease-in-out;
+}
+
+.form form>p>a {
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+/*Hover effect*/
+
+.form form>p:hover {
+    border-color: #f0f0f0;
+}
+
+/*style for the error message*/
+.form > p{
+    padding: 4px 8px;
+    background-color: rgb(255, 190, 190);
+    color: red;
+    border: 1px #ff5e5e solid;
+    border-radius: 5px;
+    text-align: center;
+    width: 35%;
+    margin: 0 auto;
+}
