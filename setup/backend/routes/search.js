@@ -55,12 +55,26 @@ router.route('/groups').get((req, res) => {
 
 
     // Request club name and tags
-    const clubName = req.body.clubName || req.query.clubName || 'GROUPS CANNOT BE NAMED THIS EXACT PHRASE'; // If no clubName found assume only tags search
+    const clubName = req.body.clubName || req.query.clubName || ''; // If no clubName found assume only tags search
     const clubTags = req.body.clubTags || req.query.clubTags || []; // If no clubTags found assume only name search
+    console.log(clubName, clubTags);
 
-    if (Array.isArray(clubTags) && clubTags.length) {
+
+    if ((Array.isArray(clubTags) && clubTags.length) && clubName.length > 0) {
+
         // Finds all groups from database that contain substring or all tags
         Club.find({$and: [{clubName: {$regex: clubName}}, {clubTags: {$all: clubTags}}]}).sort({members: -1})
+
+            // Json with groups
+            .then(clubs => res.json(clubs))
+
+            // Error catching
+            .catch(err => res.status(400).json('Error: ' + err));
+
+    } else if (Array.isArray(clubTags) && clubTags.length) {
+        
+        // Finds all groups from database that contain substring only
+        Club.find({clubTags: {$all: clubTags}}).sort({members: -1})
 
             // Json with groups
             .then(clubs => res.json(clubs))
