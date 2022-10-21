@@ -1,19 +1,39 @@
-import { render } from '@testing-library/react';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { isRouteErrorResponse } from 'react-router-dom';
+import React, { useEffect, useState} from 'react';
+import {Link } from 'react-router-dom';
+import SearchBar from './reusable_components/Search_bar';
+import SearchInterface from './search_interfaces/clubs-list-search-interface';
 
 function ClubsList() {
 
   // Used for setting states for our club variable
   const [clubs, setClubs] = useState([{}]);
+
+  const changeClubsList = (dataToReplaceWith) => {
+    setClubs(dataToReplaceWith)
+  }
+
   useEffect(() => {
     axios.get('http://localhost:5000/clubs').then(resp => {
 
     setClubs(resp.data)
-      // console.table(resp.data[0]);
+    //console.table(resp.data[0]);
   });
   }, []);
+
+  const submitFunction = (e) => {
+    e.preventDefault();
+
+    const groupName = e.target[0].value
+    console.log(groupName)
+    axios.get('http://localhost:5000/search/groups', { params: {
+      clubName: groupName
+    } }).then(res => {
+      console.log(res.data)
+    setClubs(res.data)
+
+    });
+  }
 
   // Used for setting states for our user variable
   const [user, setUser] = useState({});
@@ -24,16 +44,20 @@ function ClubsList() {
       // console.table(resp.data[0]);
   });
   }, []);
-  
+
   return (
-    <div className="container">
+
+    <div className="flex flex-col items-center h-screen">
+      <SearchInterface listChangeFunction={changeClubsList} />
+
       <table>
       <thead>
+        {/*Header of Clubs List*/}
         <tr>
-          <th>ClubName</th>
+          <th>Club Name</th>
           <th>Owner</th>
           <th>Description</th>
-          <th>ClubTags</th>
+          <th>Club Tags</th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +65,7 @@ function ClubsList() {
             let button = <button onClick={() => follow(club.clubName)}>Follow</button>
             return(
               <tr key={club.clubName}>
+                <Link to={`/clubs/${club._id}`}>{club.clubName}</Link>                
                 <th>{club.clubName}</th>
                 <th>{club.owner}</th>
                 <th>{club.description}</th>
@@ -60,8 +85,8 @@ function ClubsList() {
                 })()}
 
               </tr>
-            ); 
-          })};
+            );
+          })}
         </tbody>
     </table>
     </div>

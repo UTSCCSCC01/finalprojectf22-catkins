@@ -3,10 +3,8 @@ import pfp from "../images/image.jpg";
 import iphone from "../images/iphone.png";
 
 function ClubsPost(props) {
-  console.log("TUT");
-
   return (
-    <div className=" mt-20  w-2/3 border-2 border-[#D0D1C9]  h-1/2">
+    <div className=" mb-20  w-2/3 border-2 border-[#D0D1C9]  h-1/2">
       <div></div>
       <div className="h-14  text-center divide-y divide-[#D0D1C9]">
         <h1>{props.group}</h1>
