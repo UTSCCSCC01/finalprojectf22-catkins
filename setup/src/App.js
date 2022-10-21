@@ -15,6 +15,8 @@ import PostCreate from './components/post-create.component';
 import axios from "axios";
 import React from 'react';
 import Left_Navbar from './components/navbars/Left_Navbar';
+import Top_Navbar from './components/navbars/Top_Navbar';
+import UsersList from './components/users_list';
 
 function App() {
 
@@ -25,33 +27,17 @@ function App() {
 
     {/* Navbar on the top to be always on display */}
     <div className='flex flex-col h-screen my-7 w-screen '>
-      <nav className='flex justify-around items-center h-10 border-2 border-[#D0D1C9] shadow-md'>
-        <a href="/clubs">
-          Clubs List
-        </a>
-        <a href="/users" >
-          Users List
-        </a>
-        <a href="/clubs/testClub">
-          Feed
-        </a>
-        <a href='/clubs/create'>
-          Create a Club
-        </a>
-        <a href='/clubs/join'>
-          Join a Club
-        </a>
-        <a href='/post/create'>
-          Create a Post
-        </a>
-      </nav>
+
+      <Top_Navbar/>
+
 
       <Routes>
         <Route path="clubs" element={<ClubsList/>} />
-        <Route path="/clubs/testClub" element={<ClubsFeed/>} />
+        <Route path="/clubs/clubsFeed" element={<ClubsFeed/>} />
         <Route path="clubs/create" element={<ClubCreate/>} />
         <Route path="clubs/join" element={<ClubsJoin/>} />
         <Route path="post/create" element={<PostCreate/>} />
+        <Route path="users" element={<UsersList/>} />
         <Route path="clubs/:id" element={<ClubPage/>} />
       </Routes>
     </div>

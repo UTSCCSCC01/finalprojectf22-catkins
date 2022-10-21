@@ -37,7 +37,7 @@ export default class ClubCreate extends React.Component {
         <div class="text-5xl font-bold mt-0 mb-6"> Create your own club! </div>
         <form onSubmit={this.handleSubmit} >
           <label class="ml-10">
-            Owner Name: 
+            Owner Name:
             <input type="text" name="owner" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500" />
           </label>
           <br></br>
