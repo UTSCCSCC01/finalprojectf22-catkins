@@ -1,5 +1,4 @@
 const express = require("express");
-var session = require("express-session");
 const cors = require("cors");
 // helps connect to mongo.db
 const mongoose = require("mongoose");
@@ -14,7 +13,6 @@ const port = process.env.PORT || 5000;
 // Allows us to parse Json
 app.use(cors());
 app.use(express.json());
-app.use(session({ secret: "Node JS is bad." }));
 
 // database uri - get from ATLAS Dashboard
 const uri = process.env.ATLAS_URI;
