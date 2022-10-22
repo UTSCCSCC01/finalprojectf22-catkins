@@ -1,11 +1,7 @@
-import Reach from 'react';
+import Reach from "react";
 
 function CreateUser() {
-  return (
-    <div className="container">
-      Hello World!
-    </div>
-  );
+  return <div className="container">Hello World!</div>;
 }
 
 export default CreateUser;

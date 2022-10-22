@@ -11,8 +11,8 @@ function ClubsJoin() {
       username: document.getElementById("username").value,
     }; //Get form info
     console.log(content);
-    alert("You have joined " + content.club_name);
 
+    alert("You have joined " + content.club_name);
     axios.post("http://localhost:5000/clubs/join/", content);
   }
 

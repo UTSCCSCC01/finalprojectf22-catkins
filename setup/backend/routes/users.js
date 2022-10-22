@@ -71,23 +71,4 @@ router.route("/update/:id").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-//Login authentication
-router.route("/login").get((req, res) => {
-  var username = req.body.username;
-  var password = req.body.password;
-  user = { username: username, password: password };
-  User.findOne({ username: username, password: password })
-    .then(() => res.json("Successfully logged in!"))
-    .catch((err, user) => {
-      if (err) {
-        return res.status(500).json("Error: " + err);
-      }
-      if (!user) {
-        res.redirect("/login", { authentication: "false" });
-      }
-      users.push(user);
-      res.redirect("/", { user: username });
-    });
-});
-// You need to export the router
 module.exports = router;
