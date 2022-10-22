@@ -14,8 +14,7 @@ function Login() {
     }; //Get form infod
     console.log("sdfjhsdkjf");
 
-    axios.post("http://localhost:5000/users/login/", content).then((res) => {
-      console.log(res);
+    axios.post("http://localhost:5000/login/", content).then((res) => {
       alert(res.data);
     });
     // alert();
