@@ -31,7 +31,7 @@ const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
 const feedRouter = require("./routes/feed");
 const searchRouter = require("./routes/search");
-const loginRouter = requires(".routes/login");
+const loginRouter = require("./routes/login");
 const { db } = require("./models/post.model");
 
 // When they go to /location, they will go to that router
