@@ -47,48 +47,29 @@ app.listen(port, () => {
 });
 
 //Login authentication
-app.post("/login", (req, res) => {
-  // console.log("hi");
+app.get("/login", (req, res) => {
   var username = req.body.Username;
   var password = req.body.Password;
-  console.log("hi");
-
   console.log(req.body);
-
   user = { username: username, password: password };
   console.log(user);
-  const result = User.find({ username: username, password: password });
+  const result = User.find({ username: { username } });
+  //res.status(404).json(result.username);
   if (result) {
-    if (result.password === password) {
-      console.log("here1");
-      res.redirect("/", { username: username }).status(200).json("success");
+    if (!(result.password === password)) {
+      res.status(200).json("Sucessfully failed.");
+      res.redirect("/clubs", { username: username });
+      res.status(200).json("After redirect");
     } else {
       console.log("here2");
       console.log(result);
-
-      res.status(404).json("wrong password or not found");
+      res.status(404).json("wrong password or not found, fuck");
     }
   } else {
     console.log("here3");
 
-    res.status(404).json("wrong password or not found");
+    res.status(404).json("I hate NodeJS.");
   }
-  // .then(() => res.json("Successfully logged in!"))
-  // .catch((err, user) => {
-  //   if (err) {
-  //     console.log("bad1");
-
-  //     return res.status(500).json("Error: " + err);
-  //   }
-  //   if (!user) {
-  //     console.log("bad2");
-
-  //     res.redirect("/login", { authentication: "false" });
-  //   }
-  //   users.push(user);
-  //   console.log("bad");
-  //   res.redirect("/", { user: username });
-  // });
 });
 // You need to export the router
 app.post("/clubs", (req, res) => {

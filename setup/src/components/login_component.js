@@ -7,14 +7,13 @@ var auth = "{{authetincation}}";
 function Login() {
   //Convert form into JSON object and set POST request
   function form_submission(e) {
-    e.preventDefault();
+    // e.preventDefault();
     var content = {
       Username: document.getElementById("username").value,
       Password: document.getElementById("password").value,
     }; //Get form infod
     console.log("sdfjhsdkjf");
-
-    axios.post("http://localhost:5000/users/login/", content).then((res) => {
+    axios.get("http://localhost:5000/login", content).then((res) => {
       console.log(res);
       alert(res.data);
     });
@@ -23,7 +22,7 @@ function Login() {
   return (
     <div className="main">
       <div className="form">
-        <form method="post" onSubmit={form_submission}>
+        <form method="get" onSubmit={form_submission}>
           <h2>Login</h2>
           <div className="text">
             <i className="fas fa-user"></i>
