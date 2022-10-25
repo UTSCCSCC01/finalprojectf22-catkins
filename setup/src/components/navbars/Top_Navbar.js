@@ -23,6 +23,9 @@ function Top_Navbar () {
 <a href='/clubs/join'>
   Join a Club
 </a>
+<a href='/post/create'>
+  Create a Post
+</a>
 
 </nav>
   </>

@@ -66,17 +66,16 @@ function ClubsList() {
             return(
               <tr key={club.clubName}>
                 <Link to={`/clubs/${club._id}`}>{club.clubName}</Link>                
-                <th>{club.clubName}</th>
                 <th>{club.owner}</th>
                 <th>{club.description}</th>
                 <th>{club.clubTags}</th>
 
                 {/* Create a follow or unfollow button for each corresponding club */}
                 {(() => {
-                  let button = <button onClick={() => follow(club.clubName, user)}>Follow</button>
+                  let button = <button onClick={() => follow(club.clubName, user)} style={{borderColor: 'black', borderWidth: '2px'}}>Follow</button>
                   if (user.following != undefined) {
                     if (user.following.includes(club.clubName)) {
-                      button = <button onClick={() => unFollow(club.clubName, user)}>UnFollow</button>
+                      button = <button onClick={() => unFollow(club.clubName, user)} style={{borderColor: 'black', borderWidth: '2px'}}>UnFollow</button>
                     }
                   }
                   return (
