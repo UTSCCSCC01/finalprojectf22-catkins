@@ -4,6 +4,10 @@ import iphone from '../images/iphone.png';
 
 function ClubsPost(props) {
 
+  let image = null
+  if (props.image != "")
+    image = <img src={props.image} alt='IMAGE NOT FOUND'/>
+  
   return (
     <div className=' mb-20  w-2/3 border-2 border-[#D0D1C9]  h-1/2'>
       <div>
@@ -32,11 +36,10 @@ function ClubsPost(props) {
 
 
       {props.description}
-
+      
+      {image}
 
       </div>
-
-
 
       </div>
     </div>

@@ -15,6 +15,9 @@ const postSchema = new Schema({
         // Normal posts - 0, Questions - 1, Announcements - 2
     priority: {type: Number, required: true, default: 0},
 
+    // Contains URL of the image included with the post if it has one
+    image: {type: String, required: false, default: ""},
+
     // List of all comments made on that post
     comments: {type: [], required: true, default: []}
 
