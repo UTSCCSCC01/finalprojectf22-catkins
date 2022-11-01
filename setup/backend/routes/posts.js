@@ -27,6 +27,7 @@ router.route('/add').post((req, res) => {
     const description = req.body.description;
     const public = req.body.public;
     const priority = req.body.priority;
+    const image = req.body.image;
 
     // Check if club exists
     Club.find({name: group}, (err, clubs) => {
@@ -47,7 +48,8 @@ router.route('/add').post((req, res) => {
                 group,
                 description,
                 public,
-                priority
+                priority,
+                image
             });
 
             // Save post to database

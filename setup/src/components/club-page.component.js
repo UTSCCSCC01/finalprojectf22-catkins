@@ -63,7 +63,8 @@ function ClubPage() {
       group: club.clubName,
       description: form.Description,
       public: actualPublic,
-      priority: Number(form.Priority)
+      priority: Number(form.Priority),
+      image: form.Image
     };
 
     console.log("POST: " + post);
@@ -108,6 +109,11 @@ function ClubPage() {
       <label class="ml-10">
         Description
       <input type="text"  id="Description" name="Description" onChange={handleChange}  class="ml-10 rounded-md border-2 border-rose-500" />
+      </label>
+      <br/>
+      <label class="ml-10">
+        Image(Optional)(Imgur Link)
+      <input type="text"  id="Image" name="Image" onChange={handleChange}  class="ml-10 rounded-md border-2 border-rose-500" />
       </label>
       <br/>
       <label class="ml-10">
