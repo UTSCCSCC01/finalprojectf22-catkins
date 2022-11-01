@@ -76,6 +76,9 @@ Routes
             /feed/
                 http get request that returns a json list of posts sorted by date created (new first), only shows posts the user is following or posts set to public, also sorts posts by priority highest number first
 
+            /reply
+                handles adding replies/comments to posts. Comments go up to 2 layers deep (comments can have replies and posts can have comments) and are stored in the comments field of a post. The replies to a comment are stored in the replies section of a comment. The comments do not exist elsewhere in the database.
+
         Description
             Route for general feed including all public group posts as well as public user posts
 
