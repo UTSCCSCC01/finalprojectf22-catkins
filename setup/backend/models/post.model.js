@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+let Comment = require('../models/comment.model');
+
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
@@ -11,7 +13,11 @@ const postSchema = new Schema({
 
     // Sorting priotity, higher int shown first
         // Normal posts - 0, Questions - 1, Announcements - 2
-    priority: {type: Number, required: true, default: 0}
+    priority: {type: Number, required: true, default: 0},
+
+    // List of all comments made on that post
+    comments: {type: [], required: true, default: []}
+
 }, {
     timestamps: true, //when was created/modified
 })
