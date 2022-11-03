@@ -29,6 +29,9 @@ router.route('/comments/add').post((req, res) => {
     // The text being commented
     const content = req.body.content || req.query.content;
 
+    // Time of creation
+    const createdAt = req.body.createdAt || req.query.createdAt;
+
     // The post that the user is commenting to
     const parent = req.body.parent || req.query.parent;
 
@@ -36,9 +39,10 @@ router.route('/comments/add').post((req, res) => {
     const replying = req.body.replying || req.query.replying || null;
 
     // Make new comment object
-    let newComment = new Comment({author, content, replying});
+    US-11-Comments
+    const newComment = new Comment({author, content, replying, createdAt});
     if (!replying) {
-        newComment = new Comment({author, content, parent});
+        newComment = new Comment({author, content, parent, createdAt});
     }
 
 
