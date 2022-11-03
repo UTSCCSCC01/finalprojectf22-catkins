@@ -11,13 +11,15 @@ export default class ClubCreate extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const officialValue = false;
+    let officialValue = false;
 
     console.log(this.state.owner);
     console.log(this.state.owner.includes("@utoronto.ca"));
-    if(this.state.owner.includes("@utoronto.ca")) {
-      const officialValue=true;
+
+    if(this.state.owner.includes("@utoronto.ca")===true){
+      officialValue=true;
     }
+    console.log(officialValue);
 
     const club = {
       owner: this.state.owner,

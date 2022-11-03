@@ -82,7 +82,7 @@ function ClubPage() {
 
   // Show Official tag if it's an official club
   var isOfficial = false;
-  if (club.official) {
+  if (club.official === true) {
     console.log("Official!");
     isOfficial = true;
   } else {
@@ -91,7 +91,14 @@ function ClubPage() {
 
  return (
   <div class="ml-10">
-    <div class="text-5xl font-bold mt-0 mb-6">{club.clubName}</div>
+    <div class="text-5xl font-bold mt-0 mb-6">{club.clubName}
+    {isOfficial === true && (
+    <Fragment>
+      <label class="text-[#06b6d4] border-2 rounded-full ml-5  p-2 text-base ">
+        Official
+      </label>
+    </Fragment>)}
+    </div>
     <br/>
     {club.description}
 
@@ -132,17 +139,7 @@ function ClubPage() {
     </form>
     </Fragment>)}
 
-    {isOwner === true && (
-    <Fragment>
-      <div class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-      <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-          Cyan to blue
-      </span>
-      </div>
-      <label class="ml-10">
-        Official
-      </label>
-    </Fragment>)}
+  
 
     {/* List all posts from club */}
     <div className="flex flex-col items-center h-screen">
