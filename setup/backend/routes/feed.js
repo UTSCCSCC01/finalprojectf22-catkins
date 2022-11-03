@@ -25,7 +25,7 @@ router.route('/comments/add').post((req, res) => {
 
     // The user in question that is commenting
     const author = req.body.author || req.query.author;
-    
+
     // The text being commented
     const content = req.body.content || req.query.content;
 
@@ -39,6 +39,7 @@ router.route('/comments/add').post((req, res) => {
     const replying = req.body.replying || req.query.replying || null;
 
     // Make new comment object
+    US-11-Comments
     const newComment = new Comment({author, content, replying, createdAt});
     if (!replying) {
         newComment = new Comment({author, content, parent, createdAt});
@@ -54,17 +55,17 @@ router.route('/comments/add').post((req, res) => {
         } else {
             Post.findById(parent).then((post) => {
                 for (let i = 0; i < post.comments.length; i++) {
-                    var currentComment = post.comments[i];
+                    let currentComment = post.comments[i];
 
                     if (currentComment._id == replying) {
                         currentComment.replies.push(newComment);
                     }
                 }
             });
-            
+
         }
     });
-    
+
 });
 
 
@@ -104,10 +105,10 @@ router.route('/comments/delete').post((req, res) => {
                     }
                 }
             }).then(() => res.json("Deleted")).catch(err => res.status(400).json('Error: ' + err));
-            
+
         }
     }).catch(err => res.status(400).json("Error: " + err));
-    
+
 });
 
 // Exporting router
