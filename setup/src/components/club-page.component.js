@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, setState, Fragment} from 'react';
+import React, { useEffect, useState, Fragment} from 'react';
 import ClubsPost from './clubs-post';
 
 function ClubPage() {
@@ -25,14 +25,6 @@ function ClubPage() {
       });
   }, [club]);
 
-  // Handle User Input
-  /*const handleChange = (e) => {
-    const{ name, value } = e.target;
-    setState({
-      [name]: value,
-    });
-  }*/
-
   const [form, setForm] = useState({});
   useEffect(() => {
     console.log(form);
@@ -52,7 +44,7 @@ function ClubPage() {
 
     // Store Public Setting
     let actualPublic = false
-    if (form.Public == "true")
+    if (form.Public)
         actualPublic = true
     else
         actualPublic = false
@@ -81,11 +73,20 @@ function ClubPage() {
   // Allow user to see post submission if they are the owner
   // O/W just load posts
   var isOwner = false;
-  if (currentUser == club.owner) {
+  if (currentUser === club.owner) {
     console.log("Owner!");
     isOwner = true;
   } else {
     console.log("Not Owner");
+  }
+
+  // Show Official tag if it's an official club
+  var isOfficial = false;
+  if (club.official) {
+    console.log("Official!");
+    isOfficial = true;
+  } else {
+    console.log("Not Official");
   }
 
  return (
@@ -96,7 +97,7 @@ function ClubPage() {
 
     {/* Allow user to add their posts */}
 
-    {isOwner == true && (
+    {isOwner === true && (
       <Fragment>
     <div class='text-2xl font-bold mt-0 mb-6}'> Let your voice be heard! </div>
     <form onSubmit={handleSubmit}>
@@ -129,6 +130,18 @@ function ClubPage() {
       <br/>
       <button type="submit" class="px-10 bg-[#ffffff] h-10 mx-2 border-2 border-[#D0D1C9] shadow-md">Post</button>
     </form>
+    </Fragment>)}
+
+    {isOwner === true && (
+    <Fragment>
+      <div class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+      <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+          Cyan to blue
+      </span>
+      </div>
+      <label class="ml-10">
+        Official
+      </label>
     </Fragment>)}
 
     {/* List all posts from club */}

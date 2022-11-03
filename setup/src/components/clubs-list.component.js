@@ -66,7 +66,6 @@ function ClubsList() {
             return(
               <tr key={club.clubName}>
                 <Link to={`/clubs/${club._id}`}>{club.clubName}</Link>                
-                <th>{club.clubName}</th>
                 <th>{club.owner}</th>
                 <th>{club.description}</th>
                 <th>{club.clubTags}</th>
