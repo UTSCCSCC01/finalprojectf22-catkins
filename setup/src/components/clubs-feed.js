@@ -46,7 +46,7 @@ function ClubsFeed() {
      {clubsFeed.map((item) => {
 
        // If statement to so that users would only see post from groups that they are following
-        if (user.following != undefined && user.following.includes(item.group)) {
+        if (user.following != undefined && user.following.includes(item.group) || item.public) {
           return <ClubsPost key={item._id}
            group={item.group}
             title={item.title}
@@ -55,10 +55,12 @@ function ClubsFeed() {
              username={item.username}
              description={item.description}
              postId={item._id}
+             image={item.image}
              />
-
         }
       })}
+
+
 
     </div>
   );

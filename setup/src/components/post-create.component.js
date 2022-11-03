@@ -9,7 +9,7 @@ export default class PostCreate extends React.Component {
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
 
-      this.state = {title: "", username: "", group: "", description: "", public: true, priority: 0, clubLead: []}
+      this.state = {title: "", username: "", group: "", description: "", public: true, priority: 0, clubLead: [], image: ""}
   }
   
   handleChange = (e) => {
@@ -34,7 +34,8 @@ export default class PostCreate extends React.Component {
       group: this.state.group,
       description: this.state.description,
       public: actualPublic,
-      priority: Number(this.state.priority)
+      priority: Number(this.state.priority),
+      image: this.state.image
     };
 
     console.log(post);
@@ -86,6 +87,11 @@ export default class PostCreate extends React.Component {
           </label>
           <br></br>
           <label class="ml-10">
+            Image(Optional)(Imgur Link):
+            <input type="text" name="image" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500" />
+          </label>
+          <br></br>
+          <label class="ml-10">
             Public:
             <div onChange={this.handleChange} style={{ display: "inline" }}>
                 <input type="radio" value="true" name="public"/> Yes
@@ -118,6 +124,7 @@ export default class PostCreate extends React.Component {
           <br></br>
           <button type="submit" class="px-10 bg-[#ffffff] h-10 mx-2 border-2 border-[#D0D1C9] shadow-md">Post</button>
         </form>
+        
       </div>
     )
   }
