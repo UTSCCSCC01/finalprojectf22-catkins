@@ -2,15 +2,22 @@ import axios from 'axios';
 import Reach, { useState } from 'react';
 
 import Comment from './comment';
+import TextAreaForm from './textAreaForm';
 
 
 function CommentManager(props) {
+
+  const [replyingTo, setReplyingTo] = useState(null);
+
+  const onReplyHandler = (commentId) => {
+   setReplyingTo(commentId)
+  }
 
   const [commentText, setCommentText] = useState('');
 
   const [commentingState, setCommentingState] = useState(false);
 
-  const [comments, setComments] = useState(props.comments);
+ // const [comments, setComments] = useState(props.comments);
 
   const commentPost = (e) => {
     e.preventDefault();
@@ -23,18 +30,15 @@ function CommentManager(props) {
   }
 
   const submitHandler = (e) => {
-    e.preventDefault();
 
     const newComment = {
       author: "TEST User",
       content: commentText,
       parent: props.postId,
-      date: `${new Date()}`,
-
-      replies:[]
+      date: `${new Date()}`
     }
 
-    setComments(current => [... current, newComment]);
+   // setComments(current => [... current, newComment]);
 
     axios.post('http://localhost:5000/feed/comments/add', newComment)
 
@@ -52,17 +56,8 @@ function CommentManager(props) {
         Comment
         </button>
     {commentingState &&
-<form className="w-2/3 text-sm resize-none " onSubmit={submitHandler}>
-<textarea rows="4"
-className="w-full text-sm resize-none p-3 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-[#D0D1C9] focus:ring-[#180077] focus:border-[#180077] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-onChange={commentPost}
- placeholder="Your comment..." ></textarea>
+<TextAreaForm submitHandler={submitHandler} placeholder={"Your comment..."} buttonText={"Post it"} onChange={commentPost}/>
 
-<button
-type='submit'
-className='my-2 text-sm border-[#D0D1C9] border-2 py-2 px-4 rounded'
->Post it</button>
-</form>
 
       }
     <div className=' mb-20 w-2/3 text-sm h-fit flex flex-col items-center '>
@@ -70,13 +65,14 @@ className='my-2 text-sm border-[#D0D1C9] border-2 py-2 px-4 rounded'
 
 
 
-      {comments.map((item )=> {
+      {props.comments.map((item )=> {
         let isSub = false;
         if (item.author === "Ilyak") isSub = true;
+        console.log(item)
         return (
 
        (
-       <Comment author={item.author} content={item.content} date={item.date} subcomment={isSub} replies={item.replies}/>
+       <Comment postId={props.postId} onReplyHandler={onReplyHandler} replyingTo={replyingTo} key={item._id} author={item.author} commentId={item._id} content={item.content} date={item.date} subcomment={isSub} replies={item.replies}/>
 
        )
 

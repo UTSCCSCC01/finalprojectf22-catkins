@@ -41,6 +41,12 @@ router.route('/comments/add').post((req, res) => {
         newComment = new Comment({author, content, parent});
     }
 
+    console.log("Author is " + author);
+    console.log("content is " + content);
+    console.log("parent is " + parent);
+    console.log("replying is " + replying);
+
+
 
     // Updating post/comment
     Post.findById(parent).then(post => {
@@ -49,11 +55,13 @@ router.route('/comments/add').post((req, res) => {
             .then(() => res.json("Commented"))
             .catch(err => res.status(400).json("Error: " + err));
         } else {
+            console.log("yes i do")
             Post.findById(parent).then((post) => {
                 for (let i = 0; i < post.comments.length; i++) {
                     let currentComment = post.comments[i];
 
                     if (currentComment._id == replying) {
+                        console.log("YO")
                         currentComment.replies.push(newComment);
                     }
                 }
@@ -94,8 +102,8 @@ router.route('/comments/delete').post((req, res) => {
                     var currentComment = post.comments[i];
                     if (currentComment._id == replying) {
                         for (let j = 0; j < currentComment.replies.length; j++) {
-                            if (currentComments.replies[i]._id == deleting) {
-                                currentComments.replies.splice(i, 1);
+                            if (currentComment.replies[i]._id == deleting) {
+                                currentComment.replies.splice(i, 1);
                             }
                         }
                     }
