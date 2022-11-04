@@ -18,13 +18,16 @@ router.route('/create').post((req, res) => {
     const owner = req.body.owner;
     const clubName = req.body.clubName;
     const description = req.body.description;
+    const official = req.body.official;
     const clubTags = req.body.clubTags;
+
 
     // Create new instance of club
     const newClub = new Club({
         clubName,
         owner, 
         description, 
+        official,
         clubTags,    
     });
 
@@ -32,7 +35,8 @@ router.route('/create').post((req, res) => {
     newClub.save()
         .then(() => res.json('Club added!'))
         .catch(err => res.status(400).json('Error: ' + err));
-    
+
+    console.log(official);
     console.log("Club Added!");
 });
 
