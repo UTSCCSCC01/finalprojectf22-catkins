@@ -7,9 +7,7 @@ import CommentManager from './comment_management_component';
 
 
 function ClubsPost(props) {
-
-
-
+  console.log(props)
   let image = null
   if (props.image != "") image = <img src={props.image} alt='IMAGE NOT FOUND'/>
 
@@ -54,7 +52,7 @@ function ClubsPost(props) {
 
 
     </div>
-    <CommentManager comments={props.comments} postId={props.postId}/>
+    {<CommentManager comments={props.comments} postId={props.postId}/>}
     </>
   );
 }

@@ -24,7 +24,7 @@ function ClubPage() {
       setClubsFeed(response.data)
       });
   }, [club]);
-
+  
   const [form, setForm] = useState({});
   useEffect(() => {
     console.log(form);
@@ -150,14 +150,17 @@ function ClubPage() {
     {/* List all posts from club */}
     <div className="flex flex-col items-center h-screen">
       {clubsFeed.map((item) => { 
-        return <ClubsPost group={item.group} title={item.title} createdAt={item.createdAt} username={item.username} description={item.description}/>
+        var com = []
+        if (item.comments != undefined) {
+          com=item.comments
+        }
+        return <ClubsPost group={item.group} title={item.title} createdAt={item.createdAt} username={item.username} description={item.description} image={item.image} comments={com} postId={item._id}/>
       })}
 
     </div>
 
-    
   </div>
-  
+
 );
 }
 
