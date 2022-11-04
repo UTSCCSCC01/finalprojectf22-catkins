@@ -29,6 +29,9 @@ router.route('/comments/add').post((req, res) => {
     // The text being commented
     const content = req.body.content || req.query.content;
 
+    // Time of creation
+    const createdAt = req.body.createdAt || req.query.createdAt;
+
     // The post that the user is commenting to
     const parent = req.body.parent || req.query.parent;
 
@@ -36,9 +39,9 @@ router.route('/comments/add').post((req, res) => {
     const replying = req.body.replying || req.query.replying || null;
 
     // Make new comment object
-    let newComment = new Comment({author, content, replying});
+    const newComment = new Comment({author, content, replying, createdAt});
     if (!replying) {
-        newComment = new Comment({author, content, parent});
+        newComment = new Comment({author, content, parent, createdAt});
     }
 
     console.log("Author is " + author);
@@ -55,7 +58,7 @@ router.route('/comments/add').post((req, res) => {
             .then(() => res.json("Commented"))
             .catch(err => res.status(400).json("Error: " + err));
         } else {
-            console.log("yes i do")
+            console.log("a");
             Post.findById(parent).then((post) => {
                 for (let i = 0; i < post.comments.length; i++) {
                     let currentComment = post.comments[i];
@@ -63,9 +66,12 @@ router.route('/comments/add').post((req, res) => {
                     if (currentComment._id == replying) {
                         console.log("YO")
                         currentComment.replies.push(newComment);
+                        post.comments[i] = currentComment;
+                        post.save();
                     }
                 }
-            });
+            }).then(() => res.json("Replied"))
+                .catch(err => res.status(400).json("Error: " + err));
 
         }
     });

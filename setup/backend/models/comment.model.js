@@ -9,10 +9,10 @@ const commentSchema = new Schema({
     parent: {type: Schema.Types.ObjectId, required: true},
 
     // Replies to comment
-    replies: {type: [], required: true, default: []}
+    replies: {type: [], required: true, default: []},
 
-}, {
-    timestamps: true, //when was created/modified
+    createdAt: {type: String, required: true}
+
 })
 
 const Comment = mongoose.model('Comment', commentSchema);
