@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, setState, Fragment} from 'react';
+import React, { useEffect, useState, Fragment} from 'react';
 import ClubsPost from './clubs-post';
 
 function ClubPage() {
@@ -25,14 +25,6 @@ function ClubPage() {
       });
   }, [club]);
 
-  // Handle User Input
-  /*const handleChange = (e) => {
-    const{ name, value } = e.target;
-    setState({
-      [name]: value,
-    });
-  }*/
-
   const [form, setForm] = useState({});
   useEffect(() => {
     console.log(form);
@@ -52,7 +44,7 @@ function ClubPage() {
 
     // Store Public Setting
     let actualPublic = false
-    if (form.Public == "true")
+    if (form.Public)
         actualPublic = true
     else
         actualPublic = false
@@ -82,22 +74,38 @@ function ClubPage() {
   // Allow user to see post submission if they are the owner
   // O/W just load posts
   var isOwner = false;
-  if (currentUser == club.owner) {
+  if (currentUser === club.owner) {
     console.log("Owner!");
     isOwner = true;
   } else {
     console.log("Not Owner");
   }
 
+  // Show Official tag if it's an official club
+  var isOfficial = false;
+  if (club.official === true) {
+    console.log("Official!");
+    isOfficial = true;
+  } else {
+    console.log("Not Official");
+  }
+
  return (
   <div class="ml-10">
-    <div class="text-5xl font-bold mt-0 mb-6">{club.clubName}</div>
+    <div class="text-5xl font-bold mt-0 mb-6">{club.clubName}
+    {isOfficial === true && (
+    <Fragment>
+      <label class="text-[#06b6d4] border-2 rounded-full ml-5  p-2 text-base ">
+        Official
+      </label>
+    </Fragment>)}
+    </div>
     <br/>
     {club.description}
 
     {/* Allow user to add their posts */}
 
-    {isOwner == true && (
+    {isOwner === true && (
       <Fragment>
     <div class='text-2xl font-bold mt-0 mb-6}'> Let your voice be heard! </div>
     <form onSubmit={handleSubmit}>
@@ -136,6 +144,8 @@ function ClubPage() {
       <button type="submit" class="px-10 bg-[#ffffff] h-10 mx-2 border-2 border-[#D0D1C9] shadow-md">Post</button>
     </form>
     </Fragment>)}
+
+  
 
     {/* List all posts from club */}
     <div className="flex flex-col items-center h-screen">
