@@ -35,7 +35,7 @@ function CommentManager(props) {
       author: "TEST User",
       content: commentText,
       parent: props.postId,
-      date: `${new Date()}`
+      createdAt: `${new Date()}`,
     }
 
    // setComments(current => [... current, newComment]);
@@ -66,15 +66,18 @@ function CommentManager(props) {
 
 
       {props.comments.map((item )=> {
-        let isSub = false;
-        if (item.author === "Ilyak") isSub = true;
-        console.log(item)
         return (
 
-       (
-       <Comment postId={props.postId} onReplyHandler={onReplyHandler} replyingTo={replyingTo} key={item._id} author={item.author} commentId={item._id} content={item.content} date={item.date} subcomment={isSub} replies={item.replies}/>
-
-       )
+       <Comment postId={props.postId}
+        onReplyHandler={onReplyHandler}
+         replyingTo={replyingTo}
+          key={item._id}
+           author={item.author}
+            commentId={item._id}
+             content={item.content}
+              date={item.createdAt}
+               replies={item.replies}
+               />
 
         )
       })}

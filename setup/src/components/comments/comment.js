@@ -15,24 +15,30 @@ function Comment(props) {
 
     const [displayForm, setDisplayForm] = useState(false);
     const onOpenCommentReplyForm = (commentId) => {
-        if (props.replyingTo === props.commentId && displayForm) setDisplayForm(false)
-        else setDisplayForm(true)
+        if (props.replyingTo === props.commentId && displayForm) {
+            setDisplayForm(false)
+            setReplyingTo(null);
 
-        setReplyingTo(commentId);
+        }
+        else {
+            setDisplayForm(true)
+            setReplyingTo(commentId);
+
         props.onReplyHandler(commentId);
+        }
+
+
 
     }
 
     const onReplySubmit = (e) => {
-        console.log("which comm we reply to " + replyingTo)
-        console.log("which comm we reply to " + replyingTo)
-        console.log("reply text is " + replyText)
 
         const newComment = {
             author: "TEST User",
             content: replyText,
-            replying: replyingTo,
+            replying: props.commentId,
             parent: props.postId,
+            createdAt: `${new Date()}`,
 
           }
 
@@ -48,6 +54,7 @@ function Comment(props) {
             <h1>{props.author}</h1>
             <h1>{props.date}</h1>
 
+
         <h1>Student</h1>
         <div className="overflow-y-scroll h-20 w-full">
         {props.content}
@@ -62,19 +69,26 @@ function Comment(props) {
      && displayForm
      && < TextAreaForm onChange={replyComment} submitHandler={onReplySubmit} buttonText={"Reply"} placeholder={"Your reply..."}/> }
     {props.replies.map((item) => {
-        console.log("SUDA")
-        return (<div  className="mt-5 w-10/12 self-end h-fit border-2 border-[#D0D1C9] p-2" >
+        return (
+            <>
+        <div  className="mt-5 w-10/12 self-end h-fit border-2 border-[#D0D1C9] p-2" >
 
         <h1>{item.author}</h1>
-        <h1>{item.date}</h1>
+        <h1>{item.createdAt}</h1>
 
     <h1>Student</h1>
     <div className="overflow-y-scroll h-20 w-full">
     {item.content}
 
     </div>
-    <button onClick={() => {onOpenCommentReplyForm(item._id)}}><h1>Reply</h1></button>
-</div>)
+    <button onClick={() => {onOpenCommentReplyForm(item._id, props.commentId)}}><h1>Reply</h1></button>
+
+
+</div>
+    {props.replyingTo === item._id && displayForm
+     && < TextAreaForm onChange={replyComment} submitHandler={onReplySubmit} buttonText={"Reply"} placeholder={"Your reply..."}/> }
+</>
+)
     })}
     </>
   )
