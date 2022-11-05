@@ -5,6 +5,7 @@ Models
             name: String required -> name of club
             owner: String required -> username of club creator
             description: String required default empty -> description of club
+	Official: Boolean default false → If it is a official campus club
             clubTags: String Array required default empty -> list of strings corresponding to tags
             members: User Array required default empty -> list of users corresponding to members in the group/club
             
@@ -22,6 +23,7 @@ Models
             public: Bool required -> whether the post is visible to everyone (true) or only group members (false)
             priority: Int default 0 -> the priority of the post in feed, higher number displayed first
                 0 for normal posts, 1 for questions, 2 for announcements
+	image: String default “”, not required -> direct url link representing the image attached to the post
 
             timestamps -> created and modified timestamps
 
@@ -51,7 +53,7 @@ Routes
                 http get request that finds and returns a json list of all clubs currently in the system with no specific order
 
             /clubs/create
-                http post request handler that takes a json body with a schema matching the club model and creates a new club object in the database
+                http post request handler that takes a json body with a schema matching the club model and creates a new club object in the database. It also evaluates to see if the owner is a campus representative (has a @utoronto.ca email) to sign it as an official club
 
             /clubs/search
                 http get request that returns a json list of all clubs in the database with a name that matches the given name exactly
@@ -64,10 +66,8 @@ Routes
 
             /clubs/update/:id
                 http update request takes a json body with a schema matching the club model and updates the club corresponding to the given id with the new information
-	        
-            /clubs/join/:id
+	/clubs/join/:id
         	    http post request that takes a JSON body containing the club name club_name and username username and append username to members in club_name
-        
         Description
             Route for everything to do with clubs including creating, deleting, updating, and searching for clubs
 
@@ -75,12 +75,6 @@ Routes
         Request handlers
             /feed/
                 http get request that returns a json list of posts sorted by date created (new first), only shows posts the user is following or posts set to public, also sorts posts by priority highest number first
-
-            /comments/reply
-                handles adding replies/comments to posts. Comments go up to 2 layers deep (comments can have replies and posts can have comments) and are stored in the comments field of a post. The replies to a comment are stored in the replies section of a comment. The comments do not exist elsewhere in the database.
-
-            /comments/delete
-                takes in 3 ids corresponding to the post the comment is on, the comment being deleted, and optionally the comment the deleting is replying to. Then deletes the comment
 
         Description
             Route for general feed including all public group posts as well as public user posts
@@ -107,26 +101,6 @@ Routes
         Description
             Route for posts stored on the database including functions to add, remove, query, edit posts
 
-    /search
-        Request handlers
-            /search/
-                http get request returns a list of all clubs with no particular order in json format
-
-            /search/posts
-                http get request returns a list of all posts where title contains given string parameter (body or query) ordered by priority then date created desc 
-
-            /search/users
-                http get request returns a list of all users where username contains given string parameter (body or query) ordered by number of groups they follow desc
-            
-            /search/groups
-                http get request returns a list of all clubs where (body or query)
-                    if given both clubName string and clubTags array of strings will return results that substring match clubName and contain all given clubTags
-                    if given only clubName will return results that substring match clubName
-                    if given only clubTags will return results that match all given clubtags
-
-        Description
-            Route for all search requests made by the user
-
     /users
         Request handlers
             /users/ 
@@ -146,4 +120,7 @@ Routes
 
             /users/update/:id
                 http update request edits user in the database given its id and a json body
-
+Login/Authentication
+	/login
+		http get request that verifies the given username and password with the user data 
+from the database.
