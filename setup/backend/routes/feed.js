@@ -39,7 +39,7 @@ router.route('/comments/add').post((req, res) => {
     const replying = req.body.replying || req.query.replying || null;
 
     // Make new comment object
-    const newComment = new Comment({author, content, replying, createdAt});
+    let newComment = new Comment({author, content, replying, createdAt});
     if (!replying) {
         newComment = new Comment({author, content, parent, createdAt});
     }
@@ -51,7 +51,6 @@ router.route('/comments/add').post((req, res) => {
             .then(() => res.json("Commented"))
             .catch(err => res.status(400).json("Error: " + err));
         } else {
-            console.log("a");
             Post.findById(parent).then((post) => {
                 for (let i = 0; i < post.comments.length; i++) {
                     let currentComment = post.comments[i];
@@ -100,8 +99,8 @@ router.route('/comments/delete').post((req, res) => {
                     var currentComment = post.comments[i];
                     if (currentComment._id == replying) {
                         for (let j = 0; j < currentComment.replies.length; j++) {
-                            if (currentComments.replies[i]._id == deleting) {
-                                currentComments.replies.splice(i, 1);
+                            if (currentComment.replies[i]._id == deleting) {
+                                currentComment.replies.splice(i, 1);
                             }
                         }
                     }

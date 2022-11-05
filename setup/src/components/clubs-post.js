@@ -2,8 +2,8 @@ import axios from 'axios';
 import Reach, { useState } from 'react';
 import pfp from '../images/image.jpg';
 import iphone from '../images/iphone.png';
-import Comment from './comment';
-import CommentManager from './comment_management_component';
+import Comment from './comments/comment';
+import CommentManager from './comments/comment_management_component';
 
 
 function ClubsPost(props) {
