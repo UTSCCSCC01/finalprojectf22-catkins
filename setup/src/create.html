@@ -4,7 +4,7 @@
     <title>Create Account</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="./create.css">
+    <link type="text/css" rel="stylesheet" href="./style/create.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
@@ -19,7 +19,7 @@
             <img src="images/catkins.png" alt="Class logo">
         </div>
         <div class="form">
-            <form method="POST" action="/create">
+            <form method="POST" action="http://localhost:3000/create">
                 <h2>Create Account</h2>
                 <div class="text">
                     <i class="fas fa-user"></i>
@@ -36,9 +36,9 @@
                     <input type="text" name="last" placeholder="*Last Name" required>
                 </div>-->
                 <div class="type">
-                    <input type="radio" name="type" value="student" id="s-label" required>
+                    <input type="radio" name="role" value="student" id="s-label" required>
                     <label for="s-label">Student</label>
-                    <input type="radio" name="type" value="instructor" id ="i-label" required>
+                    <input type="radio" name="role" value="instructor" id ="i-label" required>
                     <label for="i-label">Instructor</label>
                 </div>
                 <input type="submit" value="Create">

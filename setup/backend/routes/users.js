@@ -13,9 +13,9 @@ router.route("/").get((req, res) => {
 // Endpoint handles http post requests
 router.route("/add").post((req, res) => {
   // Request username to be added
-  const username = req.body.username;
+  const username = req.body.Username;
   // Request password to be added
-  const password = req.body.password;
+  const password = req.body.Password;
   // Request role to be added
   const role = req.body.role;
   // The users following is initially set to empty
