@@ -83,7 +83,7 @@ router.route('/update/:id').post((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
-// Update the user
+// Join the club as a member 
 router.route('/join').post((req, res) => {
     Club.findOne({clubName: req.body.club_name})
     .then(club => {
@@ -112,6 +112,21 @@ router.route("/:clubName/posts").get((req, res) => {
 
     // Error catching
     .catch(err => res.status(400).json("Error: " + err));
+});
+
+// Add a user as an executive
+router.route('/addExecutive').post((req, res) => {
+    Club.findOne({clubName: req.body.clubName})
+    .then(club => {
+        console.log(club)
+        if (!club.executives.includes(req.body.username)){
+            club.executives.push(req.body.username)
+        }
+
+        club.save()
+        .then(() => res.json("Club updated!"))
+        .catch(err => res.status(400).json("Error: " + err));
+    })
 });
 
 module.exports = router;

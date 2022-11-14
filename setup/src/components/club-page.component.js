@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState, Fragment} from 'react';
 import ClubsPost from './clubs-post';
 
+//Convert form into JSON object and set POST request
+
+
 function ClubPage() {
   // Getting club ID
   var url = window.location.href;
@@ -89,6 +92,15 @@ function ClubPage() {
     console.log("Not Official");
   }
 
+  function addExecutiveFunction()
+  {
+  var executive = {clubName: club.clubName,
+                  username: document.getElementById("username").value};//Get form info
+  alert('You added ' + executive.username + ' to ' + executive.clubName);
+
+  axios.post('http://localhost:5000/clubs/addExecutive/', executive)
+  }
+
  return (
   <div class="ml-10">
     <div class="text-5xl font-bold mt-0 mb-6">{club.clubName}
@@ -105,7 +117,7 @@ function ClubPage() {
     {/* Allow user to add their posts */}
 
     {isOwner === true && (
-      <Fragment>
+    <Fragment>
     <div class='text-2xl font-bold mt-0 mb-6}'> Let your voice be heard! </div>
     <form onSubmit={handleSubmit}>
       <label class="ml-10">
@@ -139,7 +151,20 @@ function ClubPage() {
     </form>
     </Fragment>)}
 
-  
+
+    {isOwner === true && (
+    <Fragment>
+
+    <div class='text-2xl font-bold mt-0 mb-6}'> Add a new executive: </div>
+
+    <div className="form_container">
+      <form id="addExecutive" onSubmit={addExecutiveFunction}>
+      <input type="text" name='username' id='username' placeholder='Username'/>
+      <button type="submit">Add</button>
+      </form>
+    </div>
+    </Fragment>)}
+
 
     {/* List all posts from club */}
     <div className="flex flex-col items-center h-screen">

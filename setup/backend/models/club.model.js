@@ -10,6 +10,8 @@ const clubSchema = new Schema({
     clubTags: {type: [String], required: true, default: []},
     official: {type: Boolean, required:false, default: false},
     // Set list of members
+    executives: {type: [String], required: true, default: []},
+    // Set list of members
     members: {type: [String], required: true, default: []} 
 }, {
     timestamps: true, //when was created/modified
