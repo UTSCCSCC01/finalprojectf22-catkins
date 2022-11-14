@@ -43,6 +43,27 @@ router.post('/login', async (req, res) => {
 
 });
 
+// Registration (does the same thing as users/add but updated a bit)
+router.post('/register', async (req, res) => {
+
+    // Request username to be added
+    const username = req.body.username || req.query.username;
+    // Request password to be added
+    const password = req.body.password || req.query.password;
+    // Request role to be added (student by default)
+    const role = req.body.role || req.query.role || 'student';
+    // The users following is initially set to empty
+    const following = []
+
+    // Create new User
+    const newUser = new User({username, password, role, following});
+
+    // mongoose method to save user to database
+    newUser.save()
+        .then(() => res.json('User added!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
 // Authenticating the session
 router.get('/auth', async (req, res) => {
     if (req.session.user) {
