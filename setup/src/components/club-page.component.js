@@ -77,11 +77,11 @@ function ClubPage() {
   // O/W just load posts
   var isOwner = false;
   if (currentUser === club.owner) {
-    console.log("Owner!");
     isOwner = true;
-  } else {
-    console.log("Not Owner");
-  }
+  } if (club.executives.includes(currentUser)) {
+    isOwner = true;
+  } 
+
 
   // Show Official tag if it's an official club
   var isOfficial = false;
@@ -95,7 +95,8 @@ function ClubPage() {
   function addExecutiveFunction()
   {
   var executive = {clubName: club.clubName,
-                  username: document.getElementById("username").value};//Get form info
+                  username: document.getElementById("username").value};
+  //Get form info
   alert('You added ' + executive.username + ' to ' + executive.clubName);
 
   axios.post('http://localhost:5000/clubs/addExecutive/', executive)
@@ -164,7 +165,6 @@ function ClubPage() {
       </form>
     </div>
     </Fragment>)}
-
 
     {/* List all posts from club */}
     <div className="flex flex-col items-center h-screen">
