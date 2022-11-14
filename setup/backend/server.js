@@ -25,7 +25,7 @@ const connection = mongoose.connection;
 
 // connect-mongodb-session store
 const mongoDBstore = new MongoDBStore({
-    uri: process.env.DATABASE_CONNECTION_STRING,
+    uri: uri,
     collection: 'mySessions',
 });
 
