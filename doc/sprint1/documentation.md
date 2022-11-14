@@ -147,3 +147,14 @@ Routes
             /users/update/:id
                 http update request edits user in the database given its id and a json body
 
+    /api - login.js
+        Request handlers
+            /api/login
+                post request for logging in, takes username and password and creates a session object if successful
+
+            /api/auth
+                get request to get the current session if exists
+
+        Description
+            Creating and using sessions for users logging into the site
+
