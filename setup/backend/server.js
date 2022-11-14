@@ -1,26 +1,48 @@
-const express = require('express');
-const cors = require('cors');
-// helps connect to mongo.db
-const mongoose = require('mongoose');
-
 // Environment variables in .env file
 require('dotenv').config();
 
+// Session stuff
+const session = require('express-session');
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+
+// Store sessions in mongo
+const MongoDBStore = require('connect-mongodb-session')(session)
+const loginRouter = require('./routes/login');
+
 // Create express server
 const app = express();
+const MAX_AGE = 1000 * 60 * 60 * 24 * 60 // 2 months
 const port = process.env.PORT || 5000;
+
+// database uri - get from ATLAS Dashboard
+const uri = process.env.ATLAS_URI;
+
+// use NewUrlParser - to deal with new updates
+mongoose.connect(uri, { useNewUrlParser: true});
+const connection = mongoose.connection;
+
+// connect-mongodb-session store
+const mongoDBstore = new MongoDBStore({
+    uri: process.env.DATABASE_CONNECTION_STRING,
+    collection: 'mySessions',
+});
+
+// Session
+app.use(session({
+    secret: 'a9rf6ga9vd',
+    name: 'session-id', // cookies name put in "key" field in postman
+    store: mongoDBstore,
+    cookie: {maxAge: MAX_AGE, sameSite: false, secure: false,},
+    resave: true,
+    saveUninitialized: false,
+}));
 
 // Allows us to parse Json
 app.use(cors());
 app.use(express.json());
 
-// database uri - get from ATLAS Dashboard
-const uri = process.env.ATLAS_URI;
-// use NewUrlParser - to deal with new updates
-mongoose.connect(uri, { useNewUrlParser: true});
-
-
-const connection = mongoose.connection;
 // Onde connection is open, it will register in the log
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
@@ -40,6 +62,7 @@ app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/feed', feedRouter);
 app.use('/search', searchRouter);
+app.use('/api', loginRouter);
 
 
 // Starts listening to a PORT
