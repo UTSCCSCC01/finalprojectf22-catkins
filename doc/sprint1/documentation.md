@@ -152,6 +152,9 @@ Routes
             /api/login
                 post request for logging in, takes username and password and creates a session object if successful
 
+            /api/registration
+                http post request adds a user to the database given a json body in the schema of the user described in models
+
             /api/auth
                 get request to get the current session if exists
 
