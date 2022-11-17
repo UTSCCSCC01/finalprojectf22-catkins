@@ -26,6 +26,10 @@ If react-scripts doesn’t automatically install, you might have to add “sudo�
 
 > npm install -g nodemon 
 
+For session dependencies install these modules as well
+
+> npm i express-session connect-mongodb-session bcrypt
+
 ### Running
 Go into setup>backend, open terminal and run "nodemon server"
 
