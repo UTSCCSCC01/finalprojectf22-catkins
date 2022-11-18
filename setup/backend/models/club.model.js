@@ -9,6 +9,8 @@ const clubSchema = new Schema({
     // Set lis of tags
     clubTags: {type: [String], required: true, default: []},
     official: {type: Boolean, required:false, default: false},
+    // Set list of executives
+    executives: {type: [String], required: true, default: []},
     // Set list of members
     members: {type: [String], required: true, default: []} 
 }, {
