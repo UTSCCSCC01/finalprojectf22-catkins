@@ -26,14 +26,6 @@ function ClubPage() {
       });
   }, [club]);
 
-  // Get all executives from specific club 
-  const [executives, setClubExecutives] = useState([{}]);
-  useEffect(() => {
-    axios.get('http://localhost:5000/clubs/' + club.clubName + '/executives').then(response => {
-      setClubExecutives(response.data)
-      });
-  }, [club]);
-
   const [form, setForm] = useState({});
   useEffect(() => {
     console.log(form);
@@ -64,7 +56,8 @@ function ClubPage() {
       group: club.clubName,
       description: form.Description,
       public: actualPublic,
-      priority: Number(form.Priority)
+      priority: Number(form.Priority),
+      image: form.Image
     };
 
     console.log("POST: " + post);
@@ -150,6 +143,11 @@ function ClubPage() {
       </label>
       <br/>
       <label class="ml-10">
+        Image(Optional)(Imgur Link)
+      <input type="text"  id="Image" name="Image" onChange={handleChange}  class="ml-10 rounded-md border-2 border-rose-500" />
+      </label>
+      <br/>
+      <label class="ml-10">
         Public:
           <div name="Public" id="Public" onChange={handleChange} style={{ display: "inline" }}>
             <input type="radio" value="true" id="Public" name="public"/> Yes
@@ -193,14 +191,17 @@ function ClubPage() {
     {/* List all posts from club */}
     <div className="flex flex-col items-center h-screen">
       {clubsFeed.map((item) => { 
-        return <ClubsPost group={item.group} title={item.title} createdAt={item.createdAt} username={item.username} description={item.description}/>
+        var com = []
+        if (item.comments != undefined) {
+          com=item.comments
+        }
+        return <ClubsPost group={item.group} title={item.title} createdAt={item.createdAt} username={item.username} description={item.description} image={item.image} comments={com} postId={item._id}/>
       })}
 
     </div>
 
-    
   </div>
-  
+
 );
 }
 

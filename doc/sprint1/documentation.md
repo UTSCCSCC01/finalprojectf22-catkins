@@ -76,6 +76,12 @@ Routes
             /feed/
                 http get request that returns a json list of posts sorted by date created (new first), only shows posts the user is following or posts set to public, also sorts posts by priority highest number first
 
+            /comments/reply
+                handles adding replies/comments to posts. Comments go up to 2 layers deep (comments can have replies and posts can have comments) and are stored in the comments field of a post. The replies to a comment are stored in the replies section of a comment. The comments do not exist elsewhere in the database.
+
+            /comments/delete
+                takes in 3 ids corresponding to the post the comment is on, the comment being deleted, and optionally the comment the deleting is replying to. Then deletes the comment
+
         Description
             Route for general feed including all public group posts as well as public user posts
 
@@ -140,4 +146,18 @@ Routes
 
             /users/update/:id
                 http update request edits user in the database given its id and a json body
+
+    /api - login.js
+        Request handlers
+            /api/login
+                post request for logging in, takes username and password and creates a session object if successful
+
+            /api/registration
+                http post request adds a user to the database given a json body in the schema of the user described in models
+
+            /api/auth
+                get request to get the current session if exists
+
+        Description
+            Creating and using sessions for users logging into the site
 

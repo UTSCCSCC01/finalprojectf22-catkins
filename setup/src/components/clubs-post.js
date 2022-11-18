@@ -1,11 +1,20 @@
-import Reach from 'react';
+import axios from 'axios';
+import Reach, { useState } from 'react';
 import pfp from '../images/image.jpg';
 import iphone from '../images/iphone.png';
+import Comment from './comments/comment';
+import CommentManager from './comments/comment_management_component';
+
 
 function ClubsPost(props) {
+  console.log(props)
+  let image = null
+  if (props.image != "") image = <img src={props.image} alt='IMAGE NOT FOUND'/>
 
   return (
-    <div className=' mb-20  w-2/3 border-2 border-[#D0D1C9]  h-1/2'>
+    <>
+    < div className='w-2/3 border-2 border-[#D0D1C9]  h-1/2'>
+    <div className=''>
       <div>
 
       </div>
@@ -17,7 +26,7 @@ function ClubsPost(props) {
 
 
 
-      <div className='h-64 flex flex-col items-end  p-4 break-words overflow-y-scroll '>
+      <div className='h-64 flex flex-col items-end  p-4'>
         {/* Text here */}
         <div className=' text-xs text-[#D0D1C9] '>
 
@@ -33,13 +42,18 @@ function ClubsPost(props) {
 
       {props.description}
 
+      {image}
 
       </div>
 
-
-
       </div>
+
     </div>
+
+
+    </div>
+    {<CommentManager comments={props.comments} postId={props.postId}/>}
+    </>
   );
 }
 
