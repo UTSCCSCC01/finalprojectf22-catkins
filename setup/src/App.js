@@ -1,4 +1,4 @@
-import Reach from 'react';
+import Reach, { useEffect } from 'react';
 import { Routes, Route, Link } from "react-router-dom";
 
 import pfp from './images/image.jpg';
@@ -14,18 +14,26 @@ import PostCreate from './components/post-create.component';
 
 import axios from "axios";
 import React from 'react';
+import {useSelector} from "react-redux";
 import Left_Navbar from './components/navbars/Left_Navbar';
 import Top_Navbar from './components/navbars/Top_Navbar';
 import UsersList from './components/users_list';
+import LoginComponent from './components/login/LoginComponent';
 
 function App() {
+  let userName = useSelector(state => state.login.userName);
 
-  return (
-    <div className='h-screen w-screen flex flex-row'>
-    {/* Add Navbar on the left to be always on display */}
+
+  const loginPage = (
+    <div className='h-screen w-screen flex justify-center flex-col items-center'>
+      <LoginComponent />
+    </div>
+  )
+
+  const mainApp = (
+<div className='h-screen w-screen flex flex-row'>
     <Left_Navbar />
 
-    {/* Navbar on the top to be always on display */}
     <div className='flex flex-col h-screen my-7 w-screen '>
 
       <Top_Navbar/>
@@ -42,6 +50,14 @@ function App() {
       </Routes>
     </div>
     </div>
+  )
+
+
+
+  return (
+    <>
+    {userName ? mainApp : loginPage}
+    </>
   );
 }
 
