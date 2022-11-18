@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json('Invalid login');
         }
     }
-    
+
 
 });
 
@@ -66,6 +66,7 @@ router.post('/register', async (req, res) => {
 
 // Authenticating the session
 router.get('/auth', async (req, res) => {
+
     if (req.session.user) {
         return res.json(req.session.user);
     } else {
