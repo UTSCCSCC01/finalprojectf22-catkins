@@ -20,6 +20,7 @@ router.route('/create').post((req, res) => {
     const description = req.body.description;
     const official = req.body.official;
     const clubTags = req.body.clubTags;
+    const executives = [];
 
 
     // Create new instance of club
@@ -28,7 +29,8 @@ router.route('/create').post((req, res) => {
         owner, 
         description, 
         official,
-        clubTags,    
+        executives,
+        clubTags  
     });
 
     // Save club to database
@@ -52,7 +54,6 @@ router.route('/search').get((req, res) => {
 
 // Get information about the club on the URI
 router.route("/:id").get((req, res) => {
-    console.log(req.params.id);
     Club.findById(req.params.id)
     .then(club => res.json(club))
     .catch(err => res.status(400).json("Error: " + err));
@@ -109,6 +110,18 @@ router.route("/:clubName/posts").get((req, res) => {
 
     // Json with post
     .then(post => res.json(post))
+
+    // Error catching
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
+// Get executives from specific club
+router.route("/:clubName/:executive").get((req, res) => {
+
+    // Finds Club
+    Club.find({"clubName": req.params.clubName, executives: { $in: [req.params.executive]}, }).count()
+    // Json with post
+    .then(executives => res.json(executives).executives)
 
     // Error catching
     .catch(err => res.status(400).json("Error: " + err));

@@ -2,8 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState, Fragment} from 'react';
 import ClubsPost from './clubs-post';
 
-//Convert form into JSON object and set POST request
-
 
 function ClubPage() {
   // Getting club ID
@@ -25,6 +23,14 @@ function ClubPage() {
   useEffect(() => {
     axios.get('http://localhost:5000/clubs/' + club.clubName + '/Posts').then(response => {
       setClubsFeed(response.data)
+      });
+  }, [club]);
+
+  // Get all executives from specific club 
+  const [executives, setClubExecutives] = useState([{}]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/clubs/' + club.clubName + '/executives').then(response => {
+      setClubExecutives(response.data)
       });
   }, [club]);
 
@@ -78,18 +84,30 @@ function ClubPage() {
   var isOwner = false;
   if (currentUser === club.owner) {
     isOwner = true;
-  } if (club.executives.includes(currentUser)) {
-    isOwner = true;
   } 
 
+  currentUser = "Mario";
+  // Get if current user is in Executives
+  const [isExecutive, setIsExecutive] = useState([{}]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/clubs/' + club.clubName + '/' + currentUser).then(response => {
+      setIsExecutive(response.data)
+      });
+  }, [isExecutive]);
+
+ 
+    console.log("Executives:");
+    console.log(isExecutive);
+    console.log(isExecutive > 0);
+    if(isExecutive > 0){
+      isOwner = true;
+    }
+  
 
   // Show Official tag if it's an official club
   var isOfficial = false;
   if (club.official === true) {
-    console.log("Official!");
     isOfficial = true;
-  } else {
-    console.log("Not Official");
   }
 
   function addExecutiveFunction()
@@ -165,6 +183,12 @@ function ClubPage() {
       </form>
     </div>
     </Fragment>)}
+
+    {/* {club.map((club) => {
+      return(
+        <tr key={club.clubName}>
+        <th>{club.executives}</th>
+        </tr>);})} */}
 
     {/* List all posts from club */}
     <div className="flex flex-col items-center h-screen">
