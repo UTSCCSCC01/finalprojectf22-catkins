@@ -1,13 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState, Fragment} from 'react';
+import { useSelector } from 'react-redux';
 import ClubsPost from './clubs-post';
+
 
 function ClubPage() {
   // Getting club ID
   var url = window.location.href;
   var clubId = url.split("/").pop();
   // Need sessions
-  var currentUser = "mario";
+  //var currentUser = "mario";
+  let currentUser = useSelector(state => state.login.userName);
 
  // Getting Specific club data
  const [club, setClub] = useState([{}]);
@@ -24,7 +27,7 @@ function ClubPage() {
       setClubsFeed(response.data)
       });
   }, [club]);
-  
+
   const [form, setForm] = useState({});
   useEffect(() => {
     console.log(form);
@@ -75,19 +78,40 @@ function ClubPage() {
   // O/W just load posts
   var isOwner = false;
   if (currentUser === club.owner) {
-    console.log("Owner!");
     isOwner = true;
-  } else {
-    console.log("Not Owner");
-  }
+  } 
+
+  // Get if current user is in Executives
+  const [isExecutive, setIsExecutive] = useState([{}]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/clubs/' + club.clubName + '/' + currentUser).then(response => {
+      setIsExecutive(response.data)
+      });
+  }, [isExecutive]);
+
+ 
+    console.log("Executives:");
+    console.log(isExecutive);
+    console.log(isExecutive > 0);
+    if(isExecutive > 0){
+      isOwner = true;
+    }
+  
 
   // Show Official tag if it's an official club
   var isOfficial = false;
   if (club.official === true) {
-    console.log("Official!");
     isOfficial = true;
-  } else {
-    console.log("Not Official");
+  }
+
+  function addExecutiveFunction()
+  {
+  var executive = {clubName: club.clubName,
+                  username: document.getElementById("username").value};
+  //Get form info
+  alert('You added ' + executive.username + ' to ' + executive.clubName);
+
+  axios.post('http://localhost:5000/clubs/addExecutive/', executive)
   }
 
  return (
@@ -106,7 +130,7 @@ function ClubPage() {
     {/* Allow user to add their posts */}
 
     {isOwner === true && (
-      <Fragment>
+    <Fragment>
     <div class='text-2xl font-bold mt-0 mb-6}'> Let your voice be heard! </div>
     <form onSubmit={handleSubmit}>
       <label class="ml-10">
@@ -145,7 +169,25 @@ function ClubPage() {
     </form>
     </Fragment>)}
 
-  
+
+    {isOwner === true && (
+    <Fragment>
+
+    <div class='text-2xl font-bold mt-0 mb-6}'> Add a new executive: </div>
+
+    <div className="form_container">
+      <form id="addExecutive" onSubmit={addExecutiveFunction}>
+      <input type="text" name='username' id='username' placeholder='Username'/>
+      <button type="submit">Add</button>
+      </form>
+    </div>
+    </Fragment>)}
+
+    {/* {club.map((club) => {
+      return(
+        <tr key={club.clubName}>
+        <th>{club.executives}</th>
+        </tr>);})} */}
 
     {/* List all posts from club */}
     <div className="flex flex-col items-center h-screen">

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default class PostCreate extends React.Component {
 
@@ -50,7 +51,7 @@ export default class PostCreate extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/users/'+'633eece780fabeb102d55acd').then(user => {
+    axios.get('http://localhost:5000/users/getUser/'+this.props.currentUser).then(user => {
         this.setState({username: user.data.username})
         this.setState({group: user.data.username})
 
