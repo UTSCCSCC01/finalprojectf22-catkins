@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, Fragment} from 'react';
+import { useSelector } from 'react-redux';
 import ClubsPost from './clubs-post';
 
 
@@ -8,7 +9,8 @@ function ClubPage() {
   var url = window.location.href;
   var clubId = url.split("/").pop();
   // Need sessions
-  var currentUser = "mario";
+  //var currentUser = "mario";
+  let currentUser = useSelector(state => state.login.userName);
 
  // Getting Specific club data
  const [club, setClub] = useState([{}]);
@@ -79,7 +81,6 @@ function ClubPage() {
     isOwner = true;
   } 
 
-  currentUser = "Mario";
   // Get if current user is in Executives
   const [isExecutive, setIsExecutive] = useState([{}]);
   useEffect(() => {

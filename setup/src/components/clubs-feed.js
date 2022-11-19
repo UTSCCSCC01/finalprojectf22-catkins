@@ -1,9 +1,12 @@
 import axios from 'axios';
 import Reach, { useEffect, useState } from 'react';
 import ClubsPost from './clubs-post';
+import { useSelector } from 'react-redux';
 import SearchBar from './reusable_components/Search_bar';
 
 function ClubsFeed() {
+
+  let currentUser = useSelector(state => state.login.userName);
 
   // Used to set states for our clubsFeed variable
   const [clubsFeed, setClubsFeed] = useState([]);
@@ -33,7 +36,7 @@ function ClubsFeed() {
   // Used to set states for our user variable
   const [user, setUser] = useState({});
   useEffect(() => {
-    axios.get('http://localhost:5000/users/'+'633eece780fabeb102d55acd').then(resp => {
+    axios.get('http://localhost:5000/users/getUser/' + currentUser).then(resp => {
 
     setUser(resp.data)
      console.table(resp.data[0]);

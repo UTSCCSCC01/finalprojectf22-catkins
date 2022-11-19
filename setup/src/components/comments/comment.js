@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useState } from "react"
 import TextAreaForm from "./textAreaForm";
+import { useSelector } from 'react-redux';
 
 function Comment(props) {
+
+    let currentUser = useSelector(state => state.login.userName);
 
     const [replyText, setReplyText] = useState('');
     const [replyingTo, setReplyingTo] = useState();
@@ -34,7 +37,7 @@ function Comment(props) {
     const onReplySubmit = (e) => {
 
         const newComment = {
-            author: "TEST User",
+            author: currentUser,
             content: replyText,
             replying: props.commentId,
             parent: props.postId,

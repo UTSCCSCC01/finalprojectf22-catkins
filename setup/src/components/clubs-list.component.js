@@ -2,9 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useState} from 'react';
 import {Link } from 'react-router-dom';
 import SearchBar from './reusable_components/Search_bar';
+import { useSelector } from 'react-redux';
 import SearchInterface from './search_interfaces/clubs-list-search-interface';
 
 function ClubsList() {
+
+  let currentUser = useSelector(state => state.login.userName);
 
   // Used for setting states for our club variable
   const [clubs, setClubs] = useState([{}]);
@@ -38,7 +41,7 @@ function ClubsList() {
   // Used for setting states for our user variable
   const [user, setUser] = useState({});
   useEffect(() => {
-    axios.get('http://localhost:5000/users/'+'633eece780fabeb102d55acd').then(resp => {
+    axios.get('http://localhost:5000/users/getUser/'+currentUser).then(resp => {
 
     setUser(resp.data)
       // console.table(resp.data[0]);
@@ -104,7 +107,7 @@ function follow(name, user) {
     following: user.following
   }
 
-  axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
+  axios.post('http://localhost:5000/users/update/'+user._id, updatedUser)
   window.location.reload(false)
 }
 
@@ -120,7 +123,7 @@ function unFollow(name, user) {
     following: user.following
   }
 
-  axios.post('http://localhost:5000/users/update/'+'633eece780fabeb102d55acd', updatedUser)
+  axios.post('http://localhost:5000/users/update/'+user._id, updatedUser)
   window.location.reload(false)
 }
 

@@ -11,6 +11,8 @@ import CreateUser from './components/create-user.component';
 import EditClub from './components/edit-club.component';
 import ClubsJoin from './components/clubs-join.component';
 import PostCreate from './components/post-create.component';
+import PostCreateFunctional from './components/post-create-functional.component';
+import CreateClubFunctional from './components/create-club-functional.component';
 
 import axios from "axios";
 import React from 'react';
@@ -42,9 +44,9 @@ function App() {
       <Routes>
         <Route path="clubs" element={<ClubsList/>} />
         <Route path="/clubs/clubsFeed" element={<ClubsFeed/>} />
-        <Route path="clubs/create" element={<ClubCreate/>} />
+        <Route path="clubs/create" element={<CreateClubFunctional/>} />
         <Route path="clubs/join" element={<ClubsJoin/>} />
-        <Route path="post/create" element={<PostCreate/>} />
+        <Route path="post/create" element={<PostCreateFunctional/>} />
         <Route path="users" element={<UsersList/>} />
         <Route path="clubs/:id" element={<ClubPage/>} />
       </Routes>

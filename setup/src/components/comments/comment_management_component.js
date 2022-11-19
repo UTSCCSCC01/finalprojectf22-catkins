@@ -2,10 +2,12 @@ import axios from 'axios';
 import Reach, { useState } from 'react';
 
 import Comment from './comment';
+import { useSelector } from 'react-redux';
 import TextAreaForm from './textAreaForm';
 
 
 function CommentManager(props) {
+  let currentUser = useSelector(state => state.login.userName);
 
   const [replyingTo, setReplyingTo] = useState(null);
 
@@ -32,7 +34,7 @@ function CommentManager(props) {
   const submitHandler = (e) => {
 
     const newComment = {
-      author: "TEST User",
+      author: currentUser,
       content: commentText,
       parent: props.postId,
       createdAt: `${new Date()}`,

@@ -13,6 +13,8 @@ export default class ClubCreate extends React.Component {
     event.preventDefault();
     let officialValue = false;
 
+    this.setState({owner : this.props.currentUser})
+
     console.log(this.state.owner);
     console.log(this.state.owner.includes("@utoronto.ca"));
 
@@ -46,11 +48,6 @@ export default class ClubCreate extends React.Component {
         <br></br>
         <div class="text-5xl font-bold mt-0 mb-6"> Create your own club! </div>
         <form onSubmit={this.handleSubmit} >
-          <label class="ml-10">
-            Owner Name:
-            <input type="text" name="owner" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500" />
-          </label>
-          <br></br>
           <label class="ml-10">
             Club Name:
             <input type="text" name="clubName" onChange={this.handleChange} class="ml-10 rounded-md border-2 border-rose-500" />
