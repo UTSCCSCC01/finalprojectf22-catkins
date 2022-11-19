@@ -11,7 +11,7 @@ router.post('/login', async (req, res) => {
     const bcrypting = false;
 
     if (!username || !password) {
-        res.status(400).json('Missing username or password');
+       return res.status(400).json('Missing username or password');
     }
 
     const user = await User.findOne({username: username});
