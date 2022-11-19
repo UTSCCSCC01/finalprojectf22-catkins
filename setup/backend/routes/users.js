@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { useSelector } = require('react-redux');
 // mongoose model
 let User = require('../models/user.model');
 
@@ -43,6 +44,13 @@ router.route('/search').get((req, res) => {
 // Get information about the user on the URI
 router.route("/:id").get((req, res) => {
     User.findById(req.params.id)
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json("Error: " + err));
+});
+
+// Get information about the user on the username
+router.route("/getUser/:username").get((req, res) => {
+    User.findOne({username : req.params.username})
     .then(user => res.json(user))
     .catch(err => res.status(400).json("Error: " + err));
 });
