@@ -26,9 +26,13 @@ If react-scripts doesn’t automatically install, you might have to add “sudo�
 
 > npm install -g nodemon 
 
-For session dependencies install these modules as well in /setup/backend
+For session dependencies install these modules as well
 
 > npm install express-session connect-mongodb-session bcrypt
+
+For redux, install this
+
+> npm install @reduxjs/toolkit
 
 ### Running
 Go into setup>backend, open terminal and run "nodemon server"
@@ -38,9 +42,6 @@ Go into setup, open a second terminal and run "nodemon server"
 The frontend site will be hosted on http://localhost:3000 while backend on http://localhost:5000
 
 ### Front-end
-You will need to install all the dependencies 
-
-> npm install
 
 And then start the React localhost server
 
